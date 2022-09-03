@@ -1,2 +1,8 @@
 # 測試
 Hello 這是一個簡單的測試，記錄了這是如何來操作的
+
+# Testing 2
+
+This is type from the IPad Pro.
+
+cannot type chinese
