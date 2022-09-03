@@ -10,3 +10,5 @@ cannot type chinese
 this is a test in Ipad 有中文好欸
 
 太好了這裡有中文
+
+這個是切換名字的測試
