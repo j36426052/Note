@@ -184,28 +184,119 @@ MSS: maximum segement size, 不同作業系統大小設定不一樣（單位是b
 
 ### 3.5.2 TCP Segment Structure
 
+![pic](/figure/3_5-2.png)
 
 
 
-**Head**
-word = 32 bits
-C,E:網路不好用
-U:urgent
-A:ACK
-P:Push
-R:Reset
-S:Syn
-F:Fin
+**Head** 
+word = 32 bits 
+C,E:網路不好用 
+U:urgent 
+A:ACK 
+P:Push 
+R:Reset 
+S:Syn 
+F:Fin 
 
-### 3.5.3 Round-Trip Time Estimation and Timeout
+![pic](/figure/3_5-3.png)
+
+對segement編號的方法其實是用bit的順序來編號，而ack的編號是下一個想要收到的segement，當然，他是cumulated的。
+
+接著要把tcp head裡面的東西改為A
+
+當然要注意，TCP是雙方的，而兩邊各自的ack編號當然不一樣（因為兩個人傳的東西不一樣）
+
+設定ack的原因是因為有可能會丟失，因此要有ack
+
+而我們也要設定timer，因為要確定有沒有搞錯
+
+而timer要怎麼設定呢？以RTT(round trip time)當作基準去訂定timeout時間
+
+詳細公式晚點補，不能直接訂平均，因為會把一半都當作timeout，因此平均要加上一個差值
+
+**TCP Sender(simplified)**
+基本上跟GBN長得差不多
+
+RTT一開始會由作業系統來決定，網路事件多一點之後就會動態決定那個timeout時間了
+
+（晚點補sender的FSM圖片） 
+
+假如遇到duplicate的東西，那就不要理它
+
+假如sender收到了連續的三個ACKs，那sender在收到timeout之前，我們就會把東西重送過去了（因為代表網路不錯，）
+
 
 ### 3.5.4 Reliable Data Transfer
 
 ### 3.5.5 Flow Control
+因為只有receiver知道目前的網路環境、等等的，因此要把這個機制建立在receiver身上。
+
+RecBuffer: 他的大小一開始就被決定(4096 bite)。
+
+（等等補圖片）
+
+主要要關注的事下方的free buffer space(只有receiver才知道)，在ACK中的某個小地方有個區域會告訴你free buffer space，叫sender節制一點（假如不節制，那傳過去的封包receiver負擔不了，只能丟掉）
+
+
+**Connection Setup**
+
+在真的要送東西之前，要先握手才會開始這段旅程
+
+如果只有兩次握手呢？會有一大堆讓別人誤會的問題。
+
+half open：右邊的receiver以為要建立，所以開了一個通道，但sender的東西太慢送來了，導致receiver會以為要再丟一次
+ 
+TCP 3-way handshake
+1. SYNbit = 1, seq = z
+2. SYNbitt = 1, Seq = y, ACKbit = 1, ACKnum = x + 1
+3. ACKbit = 1, ACKnum = y+1.
+
+TCP: closing a connection
+1. 準備關東西
+2. 要來弄FIN的東西
+3. 兩邊都沒東西要傳送了
+
+假設最後一個掉了怎麼辦？（因為是最後一個，得不到暗示），sender必須要等兩倍的segment lifte time，避免他不是真的最後一個。
+
+
+
 
 ### 3.5.6 TCP Connection Management
 
+
+
 ## 3.6 Principles of Congestion Control Control
+
+sender 假如要自律發現網路不好，不要送太多，因為每個router都有自己的空間，假如空間不夠就會直接Loss掉，但router太忙了，他不會有空通知sender。
+
+有四個速度，理論上會不一樣
+
+TCP可以均分Router裡面的東西
+
+Scenario 1 
+Router裡面的容量無限
+
+Scenario 2
+Sender知道Router會不會滿出來（讓它不會有Loss）
+
+Scenario 2.5 
+sender知道剛剛送的哪一個封包掉了（Router會滿出來）
+重送有兩個狀況
+1. Timeout
+2. Data掉包
+但目前只會出現第二種，因此那個速度只會差一點點
+
+
+Scenario 2.7
+會有timeout的情況發生，而且會有兩種情況
+1. 真的掉了
+2. 沒掉，只是塞車
+
+
+
+
+
+
 
 ### 3.6.1 The Causes and the Costs of Congestion
 
@@ -213,11 +304,36 @@ F:Fin
 
 ## 3.7 TCP Congestion Control
 
+那具體來說sender到底該怎麼控制自己呢
+
+主要是用收到的ack來猜測sender可不可以繼續增加
+
+假如ack都沒什麼問題 --> 一直增加要傳的數量
+假如發現出現timeout --> 把要傳送的東西砍一半
+
+TCP send 的中間叫做congestion window
+
+TCP rate $\approx \dfrac{cwnd}{rtt} $
+
+slow start: Rtt 會指數成長
+
+他一點都不slow
+
+slow start throwshold: 到達某個數字之後不用指數成長，用線性成長
+
+
+TCP CUBIC：被砍半之後變成一個左上角1/4圓形
+
+
+
+
 ### 3.7.1 Classic TCP Congestion Control
 
 ### 3.7.2 Network-Assisted Explicit Congestion Notification and Delayed-based Congestion Control
 
 ## 3.7.3 Fairness
+
+
 
 ## 3.8 Evolution of Transport-Layer Functionality
 
