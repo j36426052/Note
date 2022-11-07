@@ -89,8 +89,8 @@ checksum的算法就是把sum的01翻過來
 - acknowledgements(ACKs): reciver告訴sender傳好的
 - negative acknowledgements(NAKs): receiver 告訴sender傳的有error
 
-1. sender的FSM <br> ![picture](/figure/3_4-5.png) <br> Sender 一樣在call from above的狀態，收到訊息之後，要先算出checksum讓sender可以偵測error，接著把封包丟過去，接著進到wait for ack 的狀態，假如收到成功就結束了，等待下一個call from above. 假如失敗了，那就再送一次，然後再回到wait for ack.
-2. receiver的FSM <br> ![picture](/figure/3_4-6.png)<br> receiver一直在wait for call from below，接到東西之後開始確定有沒有問題，假如沒問題就多送一個ack過去，失敗的話就回傳，回傳過後一樣回到wait for call from below
+1. sender的FSM <br> ![picture](figure/3_4-5.png) <br> Sender 一樣在call from above的狀態，收到訊息之後，要先算出checksum讓sender可以偵測error，接著把封包丟過去，接著進到wait for ack 的狀態，假如收到成功就結束了，等待下一個call from above. 假如失敗了，那就再送一次，然後再回到wait for ack.
+2. receiver的FSM <br> ![picture](figure/3_4-6.png)<br> receiver一直在wait for call from below，接到東西之後開始確定有沒有問題，假如沒問題就多送一個ack過去，失敗的話就回傳，回傳過後一樣回到wait for call from below
 
 > 有互相等待的機制就叫 step and wait
 
@@ -100,9 +100,9 @@ checksum的算法就是把sum的01翻過來
 **RDT 2.1**
 幫封包來個編號
 
-![picture](/figure/3_4-7.png)
+![picture](figure/3_4-7.png)
 
-![picture](/figure/3_4-8.png)
+![picture](figure/3_4-8.png)
 
 重點：所有的封包都帶有checksum還有packet number，假如ack機制壞掉，receiver可以跟sender提醒他剛剛的東西收過了或者是沒收到
 
@@ -111,22 +111,22 @@ checksum的算法就是把sum的01翻過來
 特色：不使用NAK 
 那要用什麼呢？ACK加上錯誤的編號
 
-![picture](/figure/3_4-9.png)
+![picture](figure/3_4-9.png)
 
 **RDT 3.0**
 
 問題：加上了loss 
 現實情況：基本上只有sender知道有沒有到，因此請sender加上timer自行評估。
 
-![picture](/figure/3_4-10.png)
+![picture](figure/3_4-10.png)
 
 假設sender的timer已經到了，但其實ack有回來(duplicate ack)，但這樣D1還是會再送一次，因此ack的編號很重要，不然會搞錯。 
 
 
 *Performance*
-![](/figure/3_4-11.png)
+![](figure/3_4-11.png)
 
-![](/figure/3_4-12.png)
+![](figure/3_4-12.png)
 效率極差，因為是stop-and-wait 
 3.0可以用，但是可以溝通
 
@@ -135,11 +135,11 @@ checksum的算法就是把sum的01翻過來
 
 簡單來說就是一次送一大堆過去，一次收到有多少封包出問題，接著再一次送過去。
 
-![picture](/figure/3_4-13.png)
+![picture](figure/3_4-13.png)
 
 ### 3.4.3 Go-Back-N (GBN)
 **Sender**
-![picture](/figure/3_4-14.png)
+![picture](figure/3_4-14.png)
 
 基本上就是依照記憶體的大小先給一個window，代表是隨時準備要傳出去了，那個windows裡面包含兩個部分，也就是sent, not yet ack'ed和usable, not yet sent，而send_base指向第一個not yet ack'ed，nextseqnum指向第一個not yet sent，以下介紹兩個機制
 
@@ -160,10 +160,10 @@ checksum的算法就是把sum的01翻過來
 ### 3.4.4 Selective Repeat (SR)
 sender直接回報給receiver每個封包的狀況，沒有使用cumulated的機制，因此每個封包的timer都是各自獨立的
 
-![picture](/figure/3_4-16.png)
+![picture](figure/3_4-16.png)
 
 總整理
-![picture](/figure/3_4-17.png)
+![picture](figure/3_4-17.png)
 
 **A Dilemma**
 假如編號編得不好，那可能會把錯誤的封包接在一起：例如總共有7個封包，分別編號1,2,3,4,1,2,3，假如receiver收到第二個封包後，收到了第七個封包，序號上來看是123沒問題，但實際上他跳過了很多封包
@@ -176,7 +176,7 @@ sender直接回報給receiver每個封包的狀況，沒有使用cumulated的機
 ## 3.5 Connection-Oriented Transport: TCP
 Overview
 
-![picture](/figure/3_5-1.png)
+![picture](figure/3_5-1.png)
 
 MSS: maximum segement size, 不同作業系統大小設定不一樣（單位是byte）
 
@@ -184,7 +184,7 @@ MSS: maximum segement size, 不同作業系統大小設定不一樣（單位是b
 
 ### 3.5.2 TCP Segment Structure
 
-![pic](/figure/3_5-2.png)
+![pic](figure/3_5-2.png)
 
 
 
@@ -198,7 +198,7 @@ R:Reset
 S:Syn 
 F:Fin 
 
-![pic](/figure/3_5-3.png)
+![pic](figure/3_5-3.png)
 
 對segement編號的方法其實是用bit的順序來編號，而ack的編號是下一個想要收到的segement，當然，他是cumulated的。
 

@@ -16,7 +16,7 @@ Edge之中最重要的就是家中網路，以下有幾種家裡可以收到網�
 
 在這之前先介紹一些名詞
 * Splitter: 在家的裡面，把一條線上的訊號分給電話和網路<br>（把數位和類比分開）
-* DSL modem: 讓你可以上往的小烏龜
+* DSL modem: 讓你可以上網的小烏龜
 * CO(local central offic)
 * DSLAM：在CO裡面分開數位訊號和類比訊號<br>(digital subscriber line access multiplexer)
    
@@ -26,9 +26,9 @@ Edge之中最重要的就是家中網路，以下有幾種家裡可以收到網�
 簡單來說就是把電話線的一部份拿來傳送網路，而因此有一些特性
 * 一家人有獨立一條（不然講電話隔壁也聽的到內容）
 * 因應資料量不同用不同的頻率，資料量越大頻率越高
-* 資料量排名：電話(0 - 4 kHz) > 上傳(4 - 50 KHz) > 下載(50 KHz - 1MHz)
+* 資料量排名：電話(0 - 4 kHz) < 上傳(4 - 50 KHz) < 下載(50 KHz - 1MHz)
 * ADSL實際上很慢，因此實際在台灣運作的是VDSL，也就是用兩條電話線一起來傳資料。 
-![DSL](./figure/DSL.png)
+![DSL](figure/DSL.png)
 
 **Cable Internet Access**
 
@@ -68,7 +68,7 @@ Edge之中最重要的就是家中網路，以下有幾種家裡可以收到網�
 
 
 2. circuit switching<br>
-可以想像成，在sender和receiver之間建立了一個通道，這個通道就是你們佔有的，因此資料傳輸的速度就是封包大小/傳輸速率，不會有中繼站變慢的問題。
+可以想像成，在sender和receiver之間建立了一個通道，這個通道就是你們佔有的，因此資料傳輸的時間就是封包大小/傳輸速率，不會有中繼站變慢的問題。
 
 而一條網路線上，可以讓多個使用者都開通道，那要怎麼分配一條網路線的資源有兩種方法
 
@@ -103,11 +103,11 @@ Edge之中最重要的就是家中網路，以下有幾種家裡可以收到網�
     * IXP:讓Global ISP互相交換資料的東西(Internet exchange point)
     * Peering link: 讓其中一些Router可以跟其他人連接
     * PoP(points of presence) is simply a group of one or more routers (at the same location) in the provider's network where customer ISPs can connect into the provider ISP.
-    ![](/figure/1_3-2.png)
+    ![](figure/1_3-2.png)
 5. Network Structure 5
     * 考量到有些提供大量網路服務資料的公司，他們自己會跟ISP建立一個屬於自己的網路e.g. Google
 
-![](/figure/1_3-3.png)
+![](figure/1_3-3.png)
 
 ## 1.4 Delay, Loss, and Throughput in Packet-Switched Networks
 
@@ -165,7 +165,7 @@ Edge之中最重要的就是家中網路，以下有幾種家裡可以收到網�
 
 **Encapsulation**
 剛剛有提到每一層的Protocal都是和不同人溝通，因此在傳送的時候，網路的每個位置也會檢查不一樣的Protocal，可以參考下面的圖片意會一下：
-![](/figure/1_5-1.jpeg)
+![](figure/1_5-1.jpeg)
 
 
 ## 1.6 Networks User Attack

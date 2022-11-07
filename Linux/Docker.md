@@ -17,6 +17,8 @@ docker search [IMAGE wnat to search]
 docker pull [IMAGE want to download]
 ~~~
 
+可以用search來找ubuntu。
+
 ## 常用指令
 **察看目前所有image**
 ~~~Docker
@@ -48,8 +50,6 @@ docker stop [ContainerName]
 ~~~Docker
 docker rm [ContainerName]
 ~~~
-
-
 
 
 ## 參考資料
