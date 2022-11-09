@@ -118,6 +118,12 @@ vim-instant-markdown
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 ```
 
+4. 建議再加上一點東西讓它可以顯示Markdown
+
+~~~ 
+let g:instant_markdown_mathjax = 1 
+~~~
+
 ## vim & LaTeX
 
 **vim LaTeX plug install**
