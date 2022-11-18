@@ -7,6 +7,18 @@
 搜尋跳下一個字:n/N
 
 
+# 進階按鍵
+
+**光標定位**
+- 最上面：zt
+- 置中  ：zz
+- 最下面：zb
+
+**水平移動**
+- 最後：$
+- 最前：0
+
+
 ## vim 基礎設定
 
 在vim裡面加入語法識別和行數
@@ -163,3 +175,5 @@ Plugin 'xuhdev/vim-latex-live-preview'
 4. [vim-instant-markdown](https://github.com/instant-markdown/vim-instant-markdown) 就酷
 5. [vim 入門指南](https://ithelp.ithome.com.tw/articles/10255325?sc=pl)
 6. [vim LaTeX配置教學](https://noootown.com/osx-vim-latex/)
+7. [vim 學習影片（高見龍）](https://www.youtube.com/playlist?list=PLBd8JGCAcUAH56L2CYF7SmWJYKwHQYUDI)
+8. [vim VSCode之類的推坑](https://medium.com/guy-chien/%E6%93%81%E6%8A%B1-vim-%E8%AE%93%E4%BD%A0%E7%9A%84%E6%99%82%E9%96%93%E4%B8%8D%E6%B5%AA%E8%B2%BB%E5%9C%A8%E7%B7%A8%E8%BC%AF%E4%B8%8A-f557d8e3e87e)
