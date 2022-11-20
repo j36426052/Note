@@ -14,7 +14,7 @@ release = '0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['recommonmark','sphinx_markdown_tables']
+extensions = ['nbsphinx','recommonmark','sphinx_markdown_tables']
 
 #extensions = ['nbsphinx','myst_parser','sphinx_markdown_tables']
 
