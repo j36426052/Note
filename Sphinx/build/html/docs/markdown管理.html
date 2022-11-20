@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown管理 &mdash; testing 0 說明文件</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜尋" href="../search.html" />
+    <link rel="next" title="Course Page" href="../Course/index.html" />
+    <link rel="prev" title="Git 記錄文件" href="git.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> testing
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">README.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Testin.html">Testin.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Testing.html">Testing.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dev/index.html">Dev Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linux/index.html">Linux Page</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Docs Page</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Maker.html">Maker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html">Git 記錄文件</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Markdown管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gitpage-hexo">Gitpage + Hexo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sphinx">SPHINX</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#html">1. 建立html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">2. 修改主題</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">3. 支援Markdown</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#latex">4. 支援LaTeX(待補)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">5. 常用方法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github">6. 丟到Github</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#makefile">MakeFile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Course/index.html">Course Page</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Docs Page</a></li>
+      <li class="breadcrumb-item active">Markdown管理</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/markdown管理.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="markdown">
+<h1>Markdown管理<a class="headerlink" href="#markdown" title="本標頭的永久連結"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="本標頭的永久連結"></a></h2>
+<p>內容主要是介紹在這麼多的Markdown裡面，該怎麼管理，並且有好看的瀏覽介面。</p>
+</section>
+<section id="gitpage-hexo">
+<h2>Gitpage + Hexo<a class="headerlink" href="#gitpage-hexo" title="本標頭的永久連結"></a></h2>
+<p>優點：可以
+缺點：要public的才可以分享</p>
+<p>參考教學：</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://hackmd.io/&#64;Heidi-Liu/note-hexo-github">一個hack md 的文件</a></p></li>
+</ol>
+</section>
+<section id="sphinx">
+<h2>SPHINX<a class="headerlink" href="#sphinx" title="本標頭的永久連結"></a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/">官網</a></p></li>
+<li><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/264647009">教程</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html">參考toc</a></p></li>
+<li><p><a class="reference external" href="https://catx4.gitbooks.io/ossf_epaper_collection/content/APP/Apps-201307-Sphinx.html">參考toc(中文)</a></p></li>
+</ol>
+<p>一開始要裝的東西（用mac裝，我全部改成用homebrew）</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install git
+sudo apt install make
+sudo apt install python3
+sudo apt install python3-pip 
+pip3 install -U Sphinx
+pip3 install sphinx-autobuild
+pip3 install sphinx_rtd_theme
+pip3 install recommonmark
+pip3 install sphinx_markdown_tables
+</pre></div>
+</div>
+<p>先在桌面建立一個Sphinx資料夾，terminal進到裡面之後執行 sphinx-quickstart</p>
+<p>接著回答五個問題</p>
+<ol class="simple">
+<li><p>分離來源並建立資料夾：是</p></li>
+<li><p>專案名成</p></li>
+<li><p>作者姓名</p></li>
+<li><p>專案發布版本</p></li>
+<li><p>專案語言：zh_TW</p></li>
+</ol>
+<p>建立完之後的結構：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">Makefile</span>      
+<span class="o">--</span><span class="n">build</span>
+<span class="o">--</span><span class="n">make</span><span class="o">.</span><span class="n">bat</span>
+<span class="o">--</span><span class="n">source</span>
+  <span class="o">--</span><span class="n">_static</span>
+  <span class="o">--</span><span class="n">_templates</span>
+  <span class="o">--</span><span class="n">comf</span><span class="o">.</span><span class="n">py</span>
+  <span class="o">--</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Makefile：可以看作是一个包含指令的文件，在使用 make 命令时，可以使用这些指令来构建文档输出。</p></li>
+<li><p>build：生成的文件的输出目录。</p></li>
+<li><p>make.bat：Windows 用命令行。</p></li>
+<li><p>_static ：静态文件目录，比如图片等。</p></li>
+<li><p>_templates：模板目录。</p></li>
+<li><p>conf.py：存放 Sphinx 的配置，包括在 sphinx-quickstart 时选中的那些值，可以自行定义其他的值。</p></li>
+<li><p>index.rst：文档项目起始文件。</p></li>
+</ul>
+<section id="html">
+<h3>1. 建立html<a class="headerlink" href="#html" title="本標頭的永久連結"></a></h3>
+<p>在目錄執行make html, 就會在 bulid/html 目錄產生html相關文件</p>
+<p>可以用sphinx-autobuild啟動HTTP伺服器</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">autobuild</span> <span class="n">source</span> <span class="n">build</span><span class="o">/</span><span class="n">html</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>2. 修改主題<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h3>
+<p>打開 conf.py，找到html_theme, 修改成sphinx_rtd_theme，就會變很漂亮</p>
+</section>
+<section id="id2">
+<h3>3. 支援Markdown<a class="headerlink" href="#id2" title="本標頭的永久連結"></a></h3>
+<p>原本不支援，但可以透過recommonmark來支援，如果需要支持表格還要另外裝 sphinx-markdown-tables 插件。這兩個插件前面已經裝好了，要在conf.py 裡面增加擴展的支援。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">&#39;recommonmark&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;sphinx_markdown_tables&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="latex">
+<h3>4. 支援LaTeX(待補)<a class="headerlink" href="#latex" title="本標頭的永久連結"></a></h3>
+</section>
+<section id="id3">
+<h3>5. 常用方法<a class="headerlink" href="#id3" title="本標頭的永久連結"></a></h3>
+<p><strong>index.rst</strong>
+這個算是個目錄檔，原始碼顯示詳細</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 首頁名稱</span>
+<span class="o">===================</span> <span class="c1">#分隔線</span>
+
+<span class="o">..</span> <span class="n">toctree</span><span class="p">::</span> <span class="c1"># 用來生成目錄的</span>
+   <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">1</span> <span class="c1">#顯示目錄的深度多少</span>
+   <span class="p">:</span><span class="n">glob</span><span class="p">:</span>       <span class="c1">#可以使用*符號</span>
+
+   <span class="o">*</span>            <span class="c1">#顯示這個資料夾所有的檔案</span>
+   <span class="n">Dev</span><span class="o">/</span><span class="n">index</span>    <span class="c1">#顯示Dev資料夾內的index檔案</span>
+
+</pre></div>
+</div>
+<p>基本上在每個資料夾都放一個index，假如那層資料夾裡面有東西就寫個*符號</p>
+</section>
+<section id="github">
+<h3>6. 丟到Github<a class="headerlink" href="#github" title="本標頭的永久連結"></a></h3>
+<blockquote>
+<div><p>修改完conf.py之後都要執行一次make html</p>
+</div></blockquote>
+</section>
+</section>
+<section id="makefile">
+<h2>MakeFile<a class="headerlink" href="#makefile" title="本標頭的永久連結"></a></h2>
+<p>好像是讓它自己產生文件，我也看不太懂</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://www.cnblogs.com/npyx/articles/12331145.html">教學文件</a></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="git.html" class="btn btn-neutral float-left" title="Git 記錄文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../Course/index.html" class="btn btn-neutral float-right" title="Course Page" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版權所有 2022, QSnake。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

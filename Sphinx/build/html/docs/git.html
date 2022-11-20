@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git 記錄文件 &mdash; testing 0 說明文件</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜尋" href="../search.html" />
+    <link rel="next" title="Markdown管理" href="markdown%E7%AE%A1%E7%90%86.html" />
+    <link rel="prev" title="Maker" href="Maker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> testing
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">README.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Testin.html">Testin.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Testing.html">Testing.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dev/index.html">Dev Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linux/index.html">Linux Page</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Docs Page</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Maker.html">Maker</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Git 記錄文件</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Git 安裝篇</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Git 初學篇</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Git 遠端連線</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Git 合併分支</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Git 指令表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">參考資料</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="markdown%E7%AE%A1%E7%90%86.html">Markdown管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Course/index.html">Course Page</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Docs Page</a></li>
+      <li class="breadcrumb-item active">Git 記錄文件</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/git.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="git">
+<h1>Git 記錄文件<a class="headerlink" href="#git" title="本標頭的永久連結"></a></h1>
+<section id="id1">
+<h2>Git 安裝篇<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h2>
+<p>記得修一下config</p>
+</section>
+<section id="id2">
+<h2>Git 初學篇<a class="headerlink" href="#id2" title="本標頭的永久連結"></a></h2>
+<p>最基本的 add, commit要會</p>
+<p><strong>三個區域(名詞)</strong></p>
+<image src="figure/gitSpace.png" alt="git" width="500"></section>
+<section id="id3">
+<h2>Git 遠端連線<a class="headerlink" href="#id3" title="本標頭的永久連結"></a></h2>
+<p>先用以下指令建立一個remote</p>
+<div class="highlight-git notranslate"><div class="highlight"><pre><span></span>git remote add [origin] [url]
+</pre></div>
+</div>
+<p>origin的意思是這個remote的name的感覺，而origin這個單字是約定成俗，沒有啥意思。</p>
+<p>下一個指令是push</p>
+<div class="highlight-git notranslate"><div class="highlight"><pre><span></span>git push [origin] [branchLocal]:[branchRemote] 
+</pre></div>
+</div>
+<p>就是把[branchLocal]推到[origin]這個節點上的[branchRemote]</p>
+</section>
+<section id="id4">
+<h2>Git 合併分支<a class="headerlink" href="#id4" title="本標頭的永久連結"></a></h2>
+<p>詳細可以參考:<a class="reference external" href="https://gitbook.tw/chapters/branch/fix-conflict">合併發生衝突了，怎麼辦</a></p>
+<p><strong>超級和平篇</strong><br />有master, cat兩個branch，如果想要把cat合併進去，先切換到master(checkout master)，接著打</p>
+<div class="highlight-Git notranslate"><div class="highlight"><pre><span></span>git merge cat
+</pre></div>
+</div>
+<p>master就會把cat裡面的commit合併到自己裡面，然後cat還是擺在那裡。</p>
+<p><strong>一點點修改篇</strong>
+假如有一個檔案 tem.txt, master和cat 兩個branch都修改了，執行完merge指令後會顯示合併失敗，並且在暫存區會多出衝突的檔案，檔案內會變成以下的樣子</p>
+<div class="highlight-Git notranslate"><div class="highlight"><pre><span></span>other same code
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; Head
+  master side
+===========
+  cat side
+»&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; cat  
+
+other same code
+</pre></div>
+</div>
+<p>將最後要留下的版本留著，修修改改之後，輸入指令</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">tem</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>把暫存區的檔案準備commit出去，沒其他意外就commit。</p>
+</section>
+<section id="id5">
+<h2>Git 指令表<a class="headerlink" href="#id5" title="本標頭的永久連結"></a></h2>
+<p><strong>config</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Git</th>
+<th>do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git config --list</td>
+<td>察看設定</td>
+</tr>
+<tr>
+<td>git config --local/global user.name [userName]</td>
+<td>設定帳號</td>
+</tr>
+<tr>
+<td>git config --local/global user.email [email]</td>
+<td>設定email</td>
+</tr>
+<tr>
+<td><strong>init/clone</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Git</td>
+<td>do</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>git clone [url]</td>
+<td>從url那邊拷貝專案下來</td>
+</tr>
+<tr>
+<td>git init</td>
+<td>這個資料夾開始git</td>
+</tr>
+<tr>
+<td>rm -rf .git</td>
+<td>移除git</td>
+</tr>
+<tr>
+<td><strong>remote</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Git</td>
+<td>do</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>git remote add [origin] [git@~.git]</td>
+<td>遠端連接</td>
+</tr>
+<tr>
+<td>git remote set-url [origin] [git@~.git]</td>
+<td>修改遠端連結</td>
+</tr>
+<tr>
+<td>git remote remove [origin]</td>
+<td>移除遠端連結</td>
+</tr>
+<tr>
+<td>git remote -v</td>
+<td>查詢遠端連結(url)</td>
+</tr>
+<tr>
+<td>git push -u [origin] [masterLocal]:[masterRemote]</td>
+<td>推上遠端並綁定(gitHub 常這樣)</td>
+</tr>
+<tr>
+<td><strong>git本人</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Git</td>
+<td>do</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>git status</td>
+<td>常看git 狀態</td>
+</tr>
+<tr>
+<td>git add .</td>
+<td>把所有要變更的東西都加進去</td>
+</tr>
+<tr>
+<td>git add [file]</td>
+<td>把想要家的檔案加進去</td>
+</tr>
+<tr>
+<td>git commit -m [message]</td>
+<td>commit 加上訊息</td>
+</tr>
+<tr>
+<td>git pull</td>
+<td>把東西從遠端拉下來</td>
+</tr>
+<tr>
+<td>git push [remote] [branch]</td>
+<td>把東西推到遠端</td>
+</tr>
+<tr>
+<td>git push -u [remote] [branch]</td>
+<td>把東西推下來還有綁定</td>
+</tr>
+<tr>
+<td>git restore --staged [file]</td>
+<td>取消git add</td>
+</tr>
+<tr>
+<td>git pull --rebase [remote] [branch]</td>
+<td></td>
+</tr>
+</tbody>
+</table><p><strong>查詢</strong>
+|Git|do|
+|-|-|
+|git config –list|查詢設定|
+|which git|查詢git安裝位置|
+|git –version|查詢git 版本|
+|git status|查詢git add狀態|
+|git log|查詢commit的log|
+|git log –oneline –all –graph|單行/樹狀顯示|
+|git log -p [fileName]|查詢檔案Log|
+|git blame [FileName]|查詢檔案的每行編輯資訊|
+|git reflog|查詢reflog(保留HEAD移動的軌跡，可以查詢到commit ID(找隱藏的用))|
+|git help|查詢指令|</p>
+<p><strong>Reset(切到某版本)</strong>
+|Git|do|
+|-|-|
+|git reset [commit]|切回到某一個commit|
+|git reset [commit] –mixed||
+|git reset [commit] –soft||
+|git reset [commit] –hard||
+|git reset [commit]^|退和前一次的commit|
+|git reset [commit]~5|退回前五次的commit|</p>
+<p><strong>Branch應用</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Git</th>
+<th>do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git branch</td>
+<td>查詢所有本地分支</td>
+</tr>
+<tr>
+<td>git branch -a</td>
+<td>查詢所有遠端分支</td>
+</tr>
+<tr>
+<td>git branch [newBranch]</td>
+<td>當前commit新建分支</td>
+</tr>
+<tr>
+<td>git branch [newBranch] [commit]</td>
+<td>在那個commit建立分支（像是貼貼紙）</td>
+</tr>
+<tr>
+<td>git branch [newBranch] [commitID]</td>
+<td></td>
+</tr>
+<tr>
+<td>git checkout [branch]</td>
+<td>切換到某分支</td>
+</tr>
+<tr>
+<td>git checkout -b [newBranch]</td>
+<td>建立新分支並切換過去</td>
+</tr>
+<tr>
+<td>git branch -d [branch]</td>
+<td>刪除某分支t</td>
+</tr>
+<tr>
+<td>git branch -D [branch]</td>
+<td>強制刪除某分支</td>
+</tr>
+<tr>
+<td>git branch -m [branch] [newName]</td>
+<td>將branch改名字(要先切到非改名的分支)</td>
+</tr>
+</tbody>
+</table></section>
+<section id="id6">
+<h2>參考資料<a class="headerlink" href="#id6" title="本標頭的永久連結"></a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10241407">Git 常用指令</a>基本上都有，以這個為版形，詳細用補充的。</p></li>
+<li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10211807">Git clone</a></p></li>
+<li><p><a class="reference external" href="https://gitbook.tw/">為你自己學 Git</a></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="Maker.html" class="btn btn-neutral float-left" title="Maker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="markdown%E7%AE%A1%E7%90%86.html" class="btn btn-neutral float-right" title="Markdown管理" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版權所有 2022, QSnake。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

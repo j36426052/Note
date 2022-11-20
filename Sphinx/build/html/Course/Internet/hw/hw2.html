@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>企業資料通訊作業二 &mdash; testing 0 說明文件</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../../search.html" />
+    <link rel="next" title="企業資料通訊作業三" href="hw3.html" />
+    <link rel="prev" title="企業資料通訊作業一" href="hw1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> testing
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">README.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Testin.html">Testin.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Testing.html">Testing.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Dev/index.html">Dev Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Linux/index.html">Linux Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">Docs Page</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Course Page</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Internet Page</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Internet HW Page</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="hw1.html">企業資料通訊作業一</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">企業資料通訊作業二</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hw3.html">企業資料通訊作業三</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../1.html">Chpater 1 Computer Networks and the Internet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2.html">Chapter 2. Application Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../3.html">Chapter 3. Transport Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4.html">Chapter 4 The Network Layer: Data Plane</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Course Page</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Internet Page</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Internet HW Page</a></li>
+      <li class="breadcrumb-item active">企業資料通訊作業二</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/Course/Internet/hw/hw2.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="id1">
+<h1>企業資料通訊作業二<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h1>
+<p>109306058 資管三 康瑋翔</p>
+<section id="q1">
+<h2>Q1:<a class="headerlink" href="#q1" title="本標頭的永久連結"></a></h2>
+<blockquote>
+<div><p>在P2P的結構中，兩個人皆有互相傳送檔案的機會，而在普通的家中網路ADSL和Cable Server時，下載的流量通常比上傳多很多，因此有可能對方想要用P2P下載你的檔案，但你上傳的速度遠遠不及它，因此會把上傳的流量吃滿，造成網路壅塞。</p>
+</div></blockquote>
+</section>
+<section id="q2">
+<h2>Q2:<a class="headerlink" href="#q2" title="本標頭的永久連結"></a></h2>
+<section id="id2">
+<h3>2-1<a class="headerlink" href="#id2" title="本標頭的永久連結"></a></h3>
+<blockquote>
+<div><p>HTTP /1.1</p>
+</div></blockquote>
+</section>
+<section id="id3">
+<h3>2-2<a class="headerlink" href="#id3" title="本標頭的永久連結"></a></h3>
+<p>在request和responce中的connection欄位裡，都寫著keep-alive，因此這是一個persistent connection.ß</p>
+</section>
+<section id="id4">
+<h3>2-3<a class="headerlink" href="#id4" title="本標頭的永久連結"></a></h3>
+<blockquote>
+<div><p>9</p>
+<ol class="simple">
+<li><p>test</p></li>
+<li><p>html,application</p></li>
+<li><p>xhtml+xml,application</p></li>
+<li><p>xml;q=0.9,image</p></li>
+<li><p>avif,image</p></li>
+<li><p>webp,image</p></li>
+<li><p>apng</p></li>
+<li><p>*/ *』q = 0.8,application</p></li>
+<li><p>signed-exchange;v=b3;q=0.9</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="id5">
+<h3>2-4<a class="headerlink" href="#id5" title="本標頭的永久連結"></a></h3>
+<blockquote>
+<div><p>https://abc.com/</p>
+</div></blockquote>
+</section>
+<section id="id6">
+<h3>2-5<a class="headerlink" href="#id6" title="本標頭的永久連結"></a></h3>
+<p>q value代表的是使用者的接受偏好，越靠近1代表使用者越喜歡，因此可以看見這位使用者叫喜歡繁體中文作為他的使用語言。</p>
+</section>
+</section>
+<section id="q3">
+<h2>Q3:<a class="headerlink" href="#q3" title="本標頭的永久連結"></a></h2>
+<section id="id7">
+<h3>3-1<a class="headerlink" href="#id7" title="本標頭的永久連結"></a></h3>
+<p>因為公司內部可能為了分流架設了四個伺服器（並且擁有不同的ip位置），但是他們四個伺服器對外共用同一個domain name，因此最後得到了四個不一樣的ip位置，而最後作業系統會幫我們隨機挑一個。</p>
+</section>
+<section id="id8">
+<h3>3-2<a class="headerlink" href="#id8" title="本標頭的永久連結"></a></h3>
+<p>應該是by local DNS server，因為在response中的Authorrity RRs標記的是0。ß</p>
+</section>
+<section id="id9">
+<h3>3-3<a class="headerlink" href="#id9" title="本標頭的永久連結"></a></h3>
+<p>系統會隨機挑一個</p>
+</section>
+</section>
+<section id="q4">
+<h2>Q4:<a class="headerlink" href="#q4" title="本標頭的永久連結"></a></h2>
+<section id="id10">
+<h3>4-1<a class="headerlink" href="#id10" title="本標頭的永久連結"></a></h3>
+<p>可以從response中看見youtube內部真實的網址其實是youtube-ui.l.google.com，因此為了讓query知道真實的domain name，他使用了cname。</p>
+</section>
+<section id="id11">
+<h3>4-2<a class="headerlink" href="#id11" title="本標頭的永久連結"></a></h3>
+<p><img alt="alt Testing" src="../../../_images/172.png" />
+<img alt="alt Testing" src="../../../_images/142.png" />
+用網路上的IP location，可以直接看出來兩個IP都在美國</p>
+<p><img alt="alt Testing" src="../../../_images/terminal.png" />
+而直接用traceroute來看，可以看見，兩個的路徑都有經過幾個共同的路徑，例如:72.14.202.60, 142.251.*.*</p>
+</section>
+<section id="id12">
+<h3>4-3<a class="headerlink" href="#id12" title="本標頭的永久連結"></a></h3>
+<p>使用cname可以讓自訂domain name有更大的彈性，可以在公司內部裡面設定不同的domain name方便管理，而網站使用者又可以只用同一個domain name管理就好，但是整個呼叫的過程就多了cname的這個程序，可能會使DNS多一些些負擔。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="hw1.html" class="btn btn-neutral float-left" title="企業資料通訊作業一" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="hw3.html" class="btn btn-neutral float-right" title="企業資料通訊作業三" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版權所有 2022, QSnake。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

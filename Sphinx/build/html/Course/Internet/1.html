@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chpater 1 Computer Networks and the Internet &mdash; testing 0 說明文件</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../search.html" />
+    <link rel="next" title="Chapter 2. Application Layer" href="2.html" />
+    <link rel="prev" title="企業資料通訊作業三" href="hw/hw3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> testing
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">README.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Testin.html">Testin.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Testing.html">Testing.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Dev/index.html">Dev Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Linux/index.html">Linux Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">Docs Page</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Course Page</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internet Page</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hw/index.html">Internet HW Page</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Chpater 1 Computer Networks and the Internet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-the-internet">1.1 What Is the Internet?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-network-edge">1.2 The Network Edge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-network-core">1.3 The Network Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delay-loss-and-throughput-in-packet-switched-networks">1.4 Delay, Loss, and Throughput in Packet-Switched Networks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protocol-layers-and-their-service-models">1.5 Protocol Layers and Their Service Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#networks-user-attack">1.6 Networks User Attack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#historu-of-computer-networking-and-the-internet">1.7 Historu of Computer Networking and the Internet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">連接網路的媒介</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="2.html">Chapter 2. Application Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3.html">Chapter 3. Transport Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4.html">Chapter 4 The Network Layer: Data Plane</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Course Page</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Internet Page</a></li>
+      <li class="breadcrumb-item active">Chpater 1 Computer Networks and the Internet</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Course/Internet/1.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="chpater-1-computer-networks-and-the-internet">
+<h1>Chpater 1 Computer Networks and the Internet<a class="headerlink" href="#chpater-1-computer-networks-and-the-internet" title="本標頭的永久連結"></a></h1>
+<section id="what-is-the-internet">
+<h2>1.1 What Is the Internet?<a class="headerlink" href="#what-is-the-internet" title="本標頭的永久連結"></a></h2>
+<p>網路簡單來說就是大家在交換資料，而想要交換資料的人稱為Network Edge，例如：電腦、伺服器，而協助資料傳來傳去的硬體、軟體、設定則稱為Network Core。</p>
+<p>其他常聽到的名詞</p>
+<ul class="simple">
+<li><p>Internet Service Provider：提供網路服務的公司</p></li>
+<li><p>Internet Standards：因為大家要送資料，所以要統一格式</p></li>
+<li><p>IETF:Internet Engineering Task Force，幫忙統一格式的組織</p></li>
+<li><p>RFCs:訂定網路格式的文件</p></li>
+</ul>
+</section>
+<section id="the-network-edge">
+<h2>1.2 The Network Edge<a class="headerlink" href="#the-network-edge" title="本標頭的永久連結"></a></h2>
+<p>Edge之中最重要的就是家中網路，以下有幾種家裡可以收到網路的方法</p>
+<p>在這之前先介紹一些名詞</p>
+<ul class="simple">
+<li><p>Splitter: 在家的裡面，把一條線上的訊號分給電話和網路<br>（把數位和類比分開）</p></li>
+<li><p>DSL modem: 讓你可以上網的小烏龜</p></li>
+<li><p>CO(local central offic)</p></li>
+<li><p>DSLAM：在CO裡面分開數位訊號和類比訊號<br>(digital subscriber line access multiplexer)</p></li>
+</ul>
+<p><strong>DSL(digital subscriber line)</strong></p>
+<p>簡單來說就是把電話線的一部份拿來傳送網路，而因此有一些特性</p>
+<ul class="simple">
+<li><p>一家人有獨立一條（不然講電話隔壁也聽的到內容）</p></li>
+<li><p>因應資料量不同用不同的頻率，資料量越大頻率越高</p></li>
+<li><p>資料量排名：電話(0 - 4 kHz) &lt; 上傳(4 - 50 KHz) &lt; 下載(50 KHz - 1MHz)</p></li>
+<li><p>ADSL實際上很慢，因此實際在台灣運作的是VDSL，也就是用兩條電話線一起來傳資料。
+<img alt="DSL" src="../../_images/DSL.png" /></p></li>
+</ul>
+<p><strong>Cable Internet Access</strong></p>
+<p>簡單來說就是用電視業者傳送電視影像的線，送網路給大家，也因為電視的特性，在一個區域內的住戶，在某一段的時候會共用一條線（因為電視同一台畫面都一樣）</p>
+<p>以下是一些補充</p>
+<ul class="simple">
+<li><p>HFC(Hybrid fiber coax):光纖同軸電纜，cable用的線</p></li>
+<li><p>CMTS(cable modem termination system):把上傳和下載分開</p></li>
+</ul>
+<p><a class="reference internal" href="hw/hw1.html"><span class="doc">Q1, ADSL和cable的優缺點</span></a></p>
+<p><strong>FTTH(fiber to the home)</strong></p>
+<p>年輕人的新玩具，就拉一條光纖網路線沒在跟你五四三</p>
+<p><strong>企業網路</strong></p>
+<p>企業網路跟家中網路不同，不需要透過電話線之類的，可以直接跟ISP申請專用網路，當然有時候不會只有一條線路（避免發生什麼意外被攻破）。</p>
+<p>資料要從Edge送到另一個Edge需要媒介，可以分為固體的和無線的，補充在下面。</p>
+</section>
+<section id="the-network-core">
+<h2>1.3 The Network Core<a class="headerlink" href="#the-network-core" title="本標頭的永久連結"></a></h2>
+<p>最重要的兩個功能：</p>
+<ol class="simple">
+<li><p>Routing : 決定資料該走什麼路線抵達終點</p></li>
+<li><p>Forwarding：就是在資料轉換(switching)</p></li>
+</ol>
+<p>而在網路傳輸時，為什麼需要被封裝呢？<a class="reference internal" href="hw/hw1.html"><span class="doc">Q3. </span></a></p>
+<p><strong>送封包的方式</strong></p>
+<ol class="simple">
+<li><p>packet switching <br>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+是目前網路上真的使用的方法，想像兩個host中間有一個router，一個封包「完整的」的抵達Router之後，封包才會「開始」往下一個地點出發。<br><br>其中還有一個機制<strong>Queueing</strong><br>也就是每個Router裡面都有容量限制，封包在Router裡面就像在排隊，因此就做queue（從Router裡面準備被送出去的封包)<br><br>而傳輸速率，因為要等一個封包完整的傳送完成，假如總資料有L大小，傳送的速度是R，每當有一個中繼站的時候，就會多出L/R的時間，而這樣的送法叫做store-and-forward.</p></li>
+</ol>
+<p><img alt="Packet-Switching的圖片" src="../../_images/1_3-1.png" /></p>
+<ol class="simple">
+<li><p>circuit switching<br>
+可以想像成，在sender和receiver之間建立了一個通道，這個通道就是你們佔有的，因此資料傳輸的時間就是封包大小/傳輸速率，不會有中繼站變慢的問題。</p></li>
+</ol>
+<p>而一條網路線上，可以讓多個使用者都開通道，那要怎麼分配一條網路線的資源有兩種方法</p>
+<ol class="simple">
+<li><p>FDM(Frequency Division Multiplexing)</p></li>
+<li><p>TDM(Time Division Multiplexing)</p></li>
+</ol>
+<p><strong>Packet Switching v.s. Circuit Switching</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Packet Switching</th>
+<th>Circuit Switching</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>better sharing of transmission capacity</td>
+<td>less delay</td>
+</tr>
+<tr>
+<td>efficient and less costly</td>
+<td></td>
+</tr>
+<tr>
+<td>more user in a time</td>
+<td></td>
+</tr>
+</tbody>
+</table><p>其中要所謂more user怎麼計算，可以參考<a class="reference internal" href="hw/hw1.html"><span class="doc">Q6</span></a></p>
+<p><strong>Network of Network</strong></p>
+<p>在前面有提到ISP是提供網路的業者，那ISP有哪些分類？這就要從幾個假設開始說起。</p>
+<p>而以下的假設要從讓「全球的使用者」都有網路可以互通</p>
+<ol class="simple">
+<li><p>Network Structure 1</p>
+<ul class="simple">
+<li><p>只有一個Global ISP，提供服務</p></li>
+</ul>
+</li>
+<li><p>Network Structure 2</p>
+<ul class="simple">
+<li><p>假設Structure 1 的ISP可以賺錢，那自然會有其他公司也想做Global ISP，因此會有多家業者一起做Global ISP是正常的</p></li>
+<li><p>為了讓全球使用者互通，ISP之間互相溝通是必須的</p></li>
+</ul>
+</li>
+<li><p>Network Structure 3</p>
+<ul class="simple">
+<li><p>在現實，有些小地方可能沒有網路連接，因此有地方業者（Regional ISP）去建立網路，並且向Global ISP(T1 ISP)溝通。</p></li>
+<li><p>當然，更實際的情況是Regional ISP 有大有小，這樣的現象稱為multi-tier hierarchy。</p></li>
+</ul>
+</li>
+<li><p>Network Structure 4</p>
+<ul class="simple">
+<li><p>由於出現了多重結構，假如網路傳輸都要一層一層傳送到T1 ISP，那全球網路會超級慢，因此下了以下的機制協助上下左右溝通更快</p></li>
+<li><p>IXP:讓Global ISP互相交換資料的東西(Internet exchange point)</p></li>
+<li><p>Peering link: 讓其中一些Router可以跟其他人連接</p></li>
+<li><p>PoP(points of presence) is simply a group of one or more routers (at the same location) in the provider』s network where customer ISPs can connect into the provider ISP.
+<img alt="../../_images/1_3-2.png" src="../../_images/1_3-2.png" /></p></li>
+</ul>
+</li>
+<li><p>Network Structure 5</p>
+<ul class="simple">
+<li><p>考量到有些提供大量網路服務資料的公司，他們自己會跟ISP建立一個屬於自己的網路e.g. Google</p></li>
+</ul>
+</li>
+</ol>
+<p><img alt="../../_images/1_3-3.png" src="../../_images/1_3-3.png" /></p>
+</section>
+<section id="delay-loss-and-throughput-in-packet-switched-networks">
+<h2>1.4 Delay, Loss, and Throughput in Packet-Switched Networks<a class="headerlink" href="#delay-loss-and-throughput-in-packet-switched-networks" title="本標頭的永久連結"></a></h2>
+<section id="types-of-delay">
+<h3>Types of Delay<a class="headerlink" href="#types-of-delay" title="本標頭的永久連結"></a></h3>
+<ol class="simple">
+<li><p>Nodal Processing Delay
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<ul class="simple">
+<li><p>你家Router在幫你檢查錯誤之類的花費的時間</p></li>
+</ul>
+</li>
+<li><p>Queuing Delay</p>
+<ul class="simple">
+<li><p>在Router裡面排隊的時間</p></li>
+</ul>
+</li>
+<li><p>Transmission delay</p>
+<ul class="simple">
+<li><p>$\dfrac{L}{R}$，L是資料量，R是傳輸資料的速度，這個Delay源自於一次不能送這麼多</p></li>
+</ul>
+</li>
+<li><p>Propagation Delay
+實體介質造成的延遲。例如送資料到月球，那你送到的時間點最快也比光速還慢，儘管資料可能送的不多。</p></li>
+<li><p>End-to-end Delay</p>
+<ul class="simple">
+<li><p>$d_{\text{end-end}} = N(d_{proc} + d_{trans} + d_{prop})$</p></li>
+</ul>
+</li>
+</ol>
+<p>想要真實的感受一下delay的話，可以用traceroute來看看你的封包在某幾個Router卡了多久。</p>
+<p>Delay的題目練習：<a class="reference internal" href="hw/hw1.html"><span class="doc">Q4,Q5</span></a></p>
+</section>
+<section id="loss">
+<h3>Loss<a class="headerlink" href="#loss" title="本標頭的永久連結"></a></h3>
+<p>資料遺失是怎麼發生的呢？當你的buffer(router裡面排隊的容量)滿了，那送過去的封包Router會直接丟掉。</p>
+</section>
+<section id="throughput">
+<h3>Throughput(吞吐量)<a class="headerlink" href="#throughput" title="本標頭的永久連結"></a></h3>
+<p>每個bit從sender到receiver的速率，很好想像的是，要思考throughput時，會考慮整個傳送路徑裡面最慢的地方。</p>
+<p>當然也可以討論瞬時吞吐量(instantaneous)還有平均吞吐量(average)</p>
+</section>
+</section>
+<section id="protocol-layers-and-their-service-models">
+<h2>1.5 Protocol Layers and Their Service Models<a class="headerlink" href="#protocol-layers-and-their-service-models" title="本標頭的永久連結"></a></h2>
+<p>什麼是Protocol?</p>
+<blockquote>
+<div><p>一個Protocol幫忙制訂「訊息傳送」的規則，包含了傳送還有接收<br>
+例如：http,制訂你平常上網的時候怎麼接收網頁的資料，伺服器傳送什麼給你</p>
+</div></blockquote>
+<section id="five-layer-internet-protocol-stack-top-down">
+<h3>Five-layer Internet protocol stack (top-down)<a class="headerlink" href="#five-layer-internet-protocol-stack-top-down" title="本標頭的永久連結"></a></h3>
+<p>由於網路的重點是送資料，但這其中涉及硬體、路由器、軟體等等，因此要設計各種不同層級的Protocal來跟各個不同的地方溝通。一開始有設計七層，但實際五層就夠了：</p>
+<ol class="simple">
+<li><p>Application Layer(7)</p></li>
+</ol>
+<ul class="simple">
+<li><p>e.g. HTTP protocol, SMTP, FTP</p></li>
+<li><p>refer to this packet of information at the application layer as a message</p></li>
+</ul>
+<ol class="simple">
+<li><p>Transport Layer(4)</p></li>
+</ol>
+<ul class="simple">
+<li><p>e.g. TCP, UDP</p></li>
+<li><p>thinked as segement</p></li>
+</ul>
+<ol class="simple">
+<li><p>Network Layer(3)</p></li>
+</ol>
+<ul class="simple">
+<li><p>e.g. IP</p></li>
+<li><p>thinked as datagrams</p></li>
+</ul>
+<ol class="simple">
+<li><p>Link Layer(2)</p></li>
+</ol>
+<ul class="simple">
+<li><p>thinked as frames</p></li>
+</ul>
+<ol class="simple">
+<li><p>Physical Layer(1)</p></li>
+</ol>
+<p>以上只是簡單給一點例子，在後面的章節會更詳細說明他們的機制還有功能。</p>
+<p><strong>Encapsulation</strong>
+剛剛有提到每一層的Protocal都是和不同人溝通，因此在傳送的時候，網路的每個位置也會檢查不一樣的Protocal，可以參考下面的圖片意會一下：
+<img alt="../../_images/1_5-1.jpeg" src="../../_images/1_5-1.jpeg" /></p>
+</section>
+</section>
+<section id="networks-user-attack">
+<h2>1.6 Networks User Attack<a class="headerlink" href="#networks-user-attack" title="本標頭的永久連結"></a></h2>
+<p>投影片好像沒有，當補充就好</p>
+<p><strong>Dos(denial-of-service) attack</strong></p>
+<ul class="simple">
+<li><p>Three Clacess</p>
+<ul>
+<li><p>Vulnerability attack</p>
+<ul>
+<li><p>let target host get a 「well-crafted」 messages, the service can stop or host crash</p></li>
+</ul>
+</li>
+<li><p>Bandwidth flooding</p>
+<ul>
+<li><p>send lots of file to host</p></li>
+</ul>
+</li>
+<li><p>Connection flooding</p>
+<ul>
+<li><p>establish a large number connection</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DDos = Distributed DoS</p></li>
+</ul>
+<blockquote>
+<div><p><em>Note:</em> packet sniffer: a passive receiver that records a copy of every packet that files.</p>
+</div></blockquote>
+</section>
+<section id="historu-of-computer-networking-and-the-internet">
+<h2>1.7 Historu of Computer Networking and the Internet<a class="headerlink" href="#historu-of-computer-networking-and-the-internet" title="本標頭的永久連結"></a></h2>
+<p>老師這邊就淺談以前的軍用網路，我們這邊跳過。</p>
+</section>
+<section id="id1">
+<h2>連接網路的媒介<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h2>
+<p><a class="reference internal" href="hw/hw1.html"><span class="doc">Q2. 有線網路 VS 無線網路</span></a></p>
+<p><strong>固體</strong></p>
+<ol class="simple">
+<li><p>Tiwsted-Pair Copper Wire</p>
+<ul class="simple">
+<li><p>least expensive, commonly used guided medium</p></li>
+<li><p>been used by telephone networks.</p></li>
+<li><p>consists of two insulated copper wires, each about 1 mm thick, arranged in a regular spiral pattern (To reduce electrical interference)</p></li>
+<li><p>Unshielded Twisted Pair (UTP)</p></li>
+</ul>
+</li>
+<li><p>Coaxial Cable</p>
+<ul class="simple">
+<li><p>consists of two copper conductors but are concentric</p></li>
+<li><p>common in cable television systems</p></li>
+<li><p>shared medium</p></li>
+</ul>
+</li>
+<li><p>Fiber Optics</p>
+<ul class="simple">
+<li><p>thin, flexible, conduct, pulese of light</p></li>
+<li><p>prefered long-haul guided transmission media, e.g. overseas links</p></li>
+<li><p>high cost of opticals devices, e.g. transmitters, receivers, switched</p></li>
+</ul>
+</li>
+<li><p>Terrestrial Radio Channels</p>
+<ul class="simple">
+<li><p>in electromagnetic spectrum</p></li>
+</ul>
+</li>
+<li><p>Satellite Radio Channels</p>
+<ul class="simple">
+<li><p>geostation satellites</p></li>
+<li><p>low-earth orbiting (LEO) satellites (closer to earth)</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="hw/hw3.html" class="btn btn-neutral float-left" title="企業資料通訊作業三" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="2.html" class="btn btn-neutral float-right" title="Chapter 2. Application Layer" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版權所有 2022, QSnake。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

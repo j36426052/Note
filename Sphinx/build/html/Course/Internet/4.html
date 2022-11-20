@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-TW" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 4 The Network Layer: Data Plane &mdash; testing 0 說明文件</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜尋" href="../../search.html" />
+    <link rel="prev" title="Chapter 3. Transport Layer" href="3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> testing
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">README.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Testin.html">Testin.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Testing.html">Testing.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Dev/index.html">Dev Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Linux/index.html">Linux Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">Docs Page</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Course Page</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internet Page</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hw/index.html">Internet HW Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1.html">Chpater 1 Computer Networks and the Internet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2.html">Chapter 2. Application Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3.html">Chapter 3. Transport Layer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Chapter 4 The Network Layer: Data Plane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview-of-network">4.1 Overview of Network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-s-inside-a-router">4.2 What』s Inside a Router?（跟資管沒關係，當作科普）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-internet-protocol-ip-ipv4-addressing-ipv6-and-more">4.3 The Internet Protocol (IP): IPv4, Addressing, IPv6, and More</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generalized-forwarding-and-sdn">4.4 Generalized Forwarding and SDN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#middleboxes">4.5 Middleboxes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">4.6 Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Course Page</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Internet Page</a></li>
+      <li class="breadcrumb-item active">Chapter 4 The Network Layer: Data Plane</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Course/Internet/4.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="chapter-4-the-network-layer-data-plane">
+<h1>Chapter 4 The Network Layer: Data Plane<a class="headerlink" href="#chapter-4-the-network-layer-data-plane" title="本標頭的永久連結"></a></h1>
+<section id="overview-of-network">
+<h2>4.1 Overview of Network<a class="headerlink" href="#overview-of-network" title="本標頭的永久連結"></a></h2>
+<p>對於Layer 4, 他所服務的對象就是Application, 所以是process到process，而對於這章所要教的Layer 3，他所服務的是host到host，想辦法從來源host丟到目標host。</p>
+<p><strong>network-layer functions:</strong>
+forwarding:單機上，從第幾個port轉到第幾個port出去（感覺像一個圓環），難在速度要很快</p>
+<p>routing:找出一條路徑，可以走到目的地（就是個交通路網，包含很多圓環），難在要瞬間決定好路徑</p>
+<p>datagrams:常常說的『封包』，就是指Layer 3的</p>
+<p>Layer 3 的運作（IP）是綁在網卡身上，不是在host身上，雖然口語上都是說host to host</p>
+<p>data plane:
+封包來得時候，實際上forward的方式</p>
+<p>control plane:
+在封包來之前，所做的所有的設定</p>
+<p>兩種control plane的方式</p>
+<ol class="simple">
+<li><p>traditional routing algorithms:</p></li>
+<li><p>software -defined networking(SND):</p></li>
+</ol>
+<p>Routing Algorithm 會確認一下這個router的鄰居有誰，接著產生一個forwarding table出來。</p>
+<p>host身上也有forwarding table，不過通常目標就ADSL，很單純</p>
+<p>SDN直接有個中心，直接把大家的table 算好，之後再把table分別傳送給大家，理論上不可行，但假如有個機構管理了一大堆的路由器，那就可以用SND，缺點是有限制，優點是算的camacity比較小，也比較快可以一起算好。</p>
+<p>注意，基本上封包掉了就掉了，Layer 3 不會重傳一次，重傳是由Layer 4去處理（或不傳）。</p>
+<p>還有，datagrame 不一定會依照順序抵達，有可能是234先到，1才抵達。</p>
+<p>也沒有minimum 的 branch</p>
+<p>基本上現在Layer 3 就剩IP，以前可能有其他的Layer 3 Protocal有提供順序、調封包的一些服務，但被淘汰了。</p>
+</section>
+<section id="what-s-inside-a-router">
+<h2>4.2 What』s Inside a Router?（跟資管沒關係，當作科普）<a class="headerlink" href="#what-s-inside-a-router" title="本標頭的永久連結"></a></h2>
+<p>裡面的結構是一堆繼電路。</p>
+<p>1片的大小成為1U，大一點的機器一台可能佔用2U,3U的空間</p>
+<p>實際上某個東西進來會從任意Port出去，課本為了簡化都從左到右</p>
+<p>routing processor(software):主要來幫忙management control plane之類的</p>
+<p>forwarding data plane(hardware): operation in nano second</p>
+<p>把port到port的動作叫做switching，要比外面的線路傳輸速度還快，不然理論上會卡住</p>
+<p><strong>Input port function</strong></p>
+<p>綠色(bit)       ：Layer 1
+藍色(frame)     ：Layer 2
+紅色(datagrame) ：Layer 3, lookup, forwarding</p>
+<p>在進到switch fabric 之前該做的事情</p>
+<p><strong>switching memory</strong></p>
+<p>中間是用memory當作連接，利用bus來傳輸</p>
+<p><strong>switchin via a bus</strong></p>
+<p>memory放在每一個port的最後，直接用bus傳到另一個人的memory</p>
+<p>這樣的結構會產生的問題是會有佔用的問題。</p>
+<p><strong>Switching via interconnection network</strong></p>
+<p>既然會佔用，那就多來幾個bus</p>
+<p><strong>Head-of-the-Line(HOL) blocking</strong></p>
+<p>由於有被佔用的問題，所以第一個排隊的會卡住後面那個</p>
+<p><strong>output port queuing</strong></p>
+<p>有可能port的線路不夠快，所以output也會有個queuing</p>
+<blockquote>
+<div><p>注意：這邊的server只是表示他要服務第一個來排隊的人</p>
+</div></blockquote>
+<p>基本上排隊是用FIFO，特別的事可能會有兩種queue，但只有一個server</p>
+<p>backlog, starving 指的是一直服務priority 高的，導致priority低的送不出去，但通常只會在家裡有這個機制，router海不做這件事情。</p>
+<p><strong>Round Robin(RR)</strong></p>
+<p>輪流的意思，重點是Weighted Fair Queuing(WFQ)，在不同的queuuing有不同的weight，長時間來看就可以有一點點proiority。</p>
+</section>
+<section id="the-internet-protocol-ip-ipv4-addressing-ipv6-and-more">
+<h2>4.3 The Internet Protocol (IP): IPv4, Addressing, IPv6, and More<a class="headerlink" href="#the-internet-protocol-ip-ipv4-addressing-ipv6-and-more" title="本標頭的永久連結"></a></h2>
+<p>Router真正開始運作之前會先跑 Path-selection algorithms，並且生出forwarding table 出來，control plan 的事情</p>
+<p>ICMP：防止router翻車</p>
+<p>整張圖是一個完整的datagrame，下面的部分是segement，也就是H4</p>
+<p>上面的五行是固定的，下面有options但是通常用不到</p>
+<p>type of servicie: 本來是設計來插隊了，</p>
+<p>TTL:每經過一站就會減一，常常初始值是128 or 64，假如它被扣完了，router應該要直接丟掉（畢竟實際上最多也才十幾個站就該到了）</p>
+<p>upper layer:用來表示放在segement是哪位，假如是TCP是6，UDP是17，1是ICMP(除錯用，是Layer 3但是放在segement那邊)</p>
+<p>MTU指的是可以容納的封包的大小，今天我們有BCD，其中C的MTU最小</p>
+<p>B知道C的狀況，所以B會把封包切一切，這個動作叫做(fragmentation)，而到了D，他會對這些封包作reassembly，把它們塞回去。</p>
+<p>以下是個範例我們該怎麼切，其中每個人的header都要在，所以要特別注意，header佔20 byte。</p>
+<p>fraglag指的是後面還有沒有，假如是1代表它不是最後一個，假如是0代表它是最後一個，可以重組了。</p>
+<p>offset: 8 bytes</p>
+<p>子網路的邊界是router</p>
+<p>switch 是 layer 2 的設備</p>
+<p>CIDR:Classless InterDomain Routing</p>
+<p>DHCP: Dynamic Host Configuration Protocol</p>
+<p>假如你還沒有ip但要跟subnet裡面的人溝通的時候該怎麼辦？</p>
+<p>broadcast: 給所有機器知道資訊，通常不需要的會丟掉</p>
+</section>
+<section id="generalized-forwarding-and-sdn">
+<h2>4.4 Generalized Forwarding and SDN<a class="headerlink" href="#generalized-forwarding-and-sdn" title="本標頭的永久連結"></a></h2>
+</section>
+<section id="middleboxes">
+<h2>4.5 Middleboxes<a class="headerlink" href="#middleboxes" title="本標頭的永久連結"></a></h2>
+</section>
+<section id="summary">
+<h2>4.6 Summary<a class="headerlink" href="#summary" title="本標頭的永久連結"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="3.html" class="btn btn-neutral float-left" title="Chapter 3. Transport Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版權所有 2022, QSnake。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
