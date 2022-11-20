@@ -6,10 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'testing'
+project = 'QSnake Markdown Note'
 copyright = '2022, QSnake'
 author = 'QSnake'
-release = '0'
+release = 'v1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
