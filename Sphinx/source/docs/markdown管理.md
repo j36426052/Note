@@ -118,7 +118,14 @@ extensions = [
 
 基本上在每個資料夾都放一個index，假如那層資料夾裡面有東西就寫個*符號
 
-### 6. 丟到Github
+### 6. 丟到Github + read
+
+1. 丟到github，然後在gitignore裡面把build/加進去
+2. 註冊 [read the docs](https://readthedocs.org/)
+3. 在丟到read the docs之前，記得在根目錄加上requirment.txt, 把extensions裡面的東西加進去
+4. 丟上read the docs, 大功告成
+
+
 
 
 > 修改完conf.py之後都要執行一次make html
