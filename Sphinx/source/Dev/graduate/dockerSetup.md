@@ -196,14 +196,54 @@ providers:
 
 ### RabbitMQ
 
+參考
+1. [官方網站看不懂](https://www.rabbitmq.com/prometheus.html)
+2. [隨便一篇](https://opensource.dwins.com/?p=463)
+3. [酷酷乾貨](https://blog.51cto.com/erdong/4844362)
+4. [官方自己定義的dashboard](https://github.com/rabbitmq/rabbitmq-server/tree/main/deps/rabbitmq_prometheus/docker/grafana/dashboards)
+
+5. [就這篇了](https://lework.github.io/2019/12/24/rabbitmq-monitor/)
+6. [docker compose設定](https://x-team.com/blog/set-up-rabbitmq-with-docker-compose/)
+
+先把Rabbit MQ pull 下來
+
+一樣把相關的設定寫進去docker composer
+
+~~~
+rabbitmq:
+  image: rabbitmq:3-management-alpine
+  container_name: 'rabbitmq'
+  ports:
+      - 5672:5672
+      - 15692:15692
+  volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+~~~
+
+如果要手動啟用exportor，輸入
+
+```
+rabbitmq-plugins enable rabbitmq_prometheus
+```
+
+但我們沒有這麼做，參考[這個](https://github.com/docker-library/rabbitmq/issues/260)
+
+在docker compose裡面加入
+```
+volumes:
+    - "./rabbit_enabled_plugins:/etc/rabbitmq/enabled_plugins"
+```   
+並且加上檔案rabbit_enabled_plugins
+```
+[rabbitmq_prometheus]
+```   
+
+接著跟node exporter一樣，把設定檔加在普羅米修斯的檔案裡面，接著再設定grafana
+
+
+
 ### Python
-
-### Prometheus
-
-
-
-
-## docker composer
 
 
 
