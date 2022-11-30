@@ -64,9 +64,17 @@ set autoindent " 跟上一行的縮進一致
 
 **安裝Vundle**
 1. 安裝git
-2. 複製git 指令 <br> ``` git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim ``` 
+2. 複製git 指令 <br>
+
+~~~
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+~~~
+
 3. 打開 vimrc 把東西都丟進去
- ```
+
+
+
+```
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -89,9 +97,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 ```
+
 4. 進到編輯器打 :PluginInstall
 
 **其他插件**
+
 ```
 " 變漂亮、文字顏色功能
 Plugin 'flazz/vim-colorschemes'
@@ -105,6 +115,17 @@ Plugin 'tyru/open-browser.vim'
 Plugin 'kannokanno/previm'
 
 ```
+
+## vim nerdtree教學
+
+
+[test](https://blog.longwin.com.tw/2009/02/vim-tree-explorer-nerdtree-plugin-2009/)
+
+加入這一行
+~~~
+nnoremap <silent> <F5> :NERDTree<CR>
+~~~
+
 
 ## vim & Markdown
 上面重複的部分
