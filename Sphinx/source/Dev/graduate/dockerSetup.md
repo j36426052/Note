@@ -103,6 +103,8 @@ scrape_configs:
 
 同上，一開始先在docker-compose.yml裡面新增關於grafana:這個container的相關資訊：
 
+
+
 ~~~
 grafana:
   image: grafana/grafana:8.1.5
