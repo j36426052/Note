@@ -19,7 +19,8 @@ def run_test():
 #主程序
 def main():
 	run_test()
-	g_server_ip = input("Please key in the IP to upload(If your server is local, key in 127.0.0.1)：")
+	g_server_ip = '192.168.50.171'
+#  input("Please key in the IP to upload(If your server is local, key in 127.0.0.1)：")
 	g_uploadFileName = input("Please key in the file's name(ex: Test.txt)：")
 	print(g_server_ip, g_uploadFileName)
  
