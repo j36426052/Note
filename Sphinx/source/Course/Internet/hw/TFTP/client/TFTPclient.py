@@ -25,7 +25,8 @@ def main():
     ## FileName要下載的檔案名稱
     # print("your default ip is 127.0.0.1")
     # g_server_ip="127.0.0.1"
-    g_server_ip = input("Please key in the IP to download(If your server is local, key in 127.0.0.1)：")
+    g_server_ip = '192.168.50.171'
+    # input("Please key in the IP to download(If your server is local, key in 127.0.0.1)：")
     g_downloadFileName = input("Please key in the file's name(ex: Test.txt)：")
     print(g_server_ip, g_downloadFileName)
     
