@@ -1,4 +1,3 @@
-# 109306062 資管三 黃宥荃
 import struct
 import socket
 from threading import Thread
