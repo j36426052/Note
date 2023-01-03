@@ -10,3 +10,4 @@
    Linux/index
    docs/index
    Course/index
+   Beauty/index
