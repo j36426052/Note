@@ -8,3 +8,4 @@
 3. [在VSCode新增open with code](https://blog.csdn.net/weixin_44941576/article/details/124647383)
 4. [powershell美化(建議搭配官方講解)](https://www.ruyut.com/2022/06/windows-oh-my-posh.html)
 5. [powershell啟動無法套用主題](https://israynotarray.com/other/20200510/1067127387/)
+6. [windows搜尋至中](https://www.howtogeek.com/706008/how-to-get-a-spotlight-style-search-bar-on-windows-10/)

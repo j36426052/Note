@@ -4,6 +4,12 @@
 
 Docker 就是一個可以把程式專案打包起來的東西，特別之處就是把整個library都包起來了，所以不會有執行的問題
 
+## 在windows 上面安裝遇到 WSL 2 installation is incomplete
+
+參考 [這個](https://bbs.huaweicloud.com/blogs/359540)
+
+控制台 --> 程式與功能 --> 啟用或關閉 windows 功能 --> 啟用windows 的Linux 子系統
+
 ## 快問快答
 
 **What is a Container?**
@@ -148,3 +154,4 @@ docker rm [ContainerName]                   #刪除Container
 1. [Docker](https://github.com/twtrubiks/docker-tutorial)
 2. [合併Docker-Dockerfile](https://ithelp.ithome.com.tw/articles/10187192)
 3. [Docker 影片教學](https://www.youtube.com/watch?v=3c-iBn73dDE&ab_channel=TechWorldwithNana)
+4. [Docker File教學](https://ithelp.ithome.com.tw/articles/10191016)
