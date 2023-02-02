@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chapter 4 The Network Layer: Data Plane &mdash; testing 0 說明文件</title>
+  <title>Chapter 4 The Network Layer: Data Plane &mdash; QSnake Markdown Note v1 說明文件</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -22,6 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜尋" href="../../search.html" />
+    <link rel="next" title="Chapter 5 The Network Layer: Control Plane" href="5.html" />
     <link rel="prev" title="Chapter 3. Transport Layer" href="3.html" /> 
 </head>
 
@@ -30,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> testing
+            <a href="../../index.html" class="icon icon-home"> QSnake Markdown Note
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -41,9 +42,6 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">README.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Testin.html">Testin.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Testing.html">Testing.md</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Dev/index.html">Dev Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Linux/index.html">Linux Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">Docs Page</a></li>
@@ -62,10 +60,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#summary">4.6 Summary</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="5.html">Chapter 5 The Network Layer: Control Plane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6.html">Chapter 6 The Link Layer and LANs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7.html">Chapter 7 Wireless and Mobile Networks</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../Beauty/index.html">Tool Page</a></li>
 </ul>
 
         </div>
@@ -74,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">testing</a>
+          <a href="../../index.html">QSnake Markdown Note</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -120,83 +122,221 @@
 </style>
 <section id="chapter-4-the-network-layer-data-plane">
 <h1>Chapter 4 The Network Layer: Data Plane<a class="headerlink" href="#chapter-4-the-network-layer-data-plane" title="本標頭的永久連結"></a></h1>
+<p>在這一章，我們主要了解到在Router中，資料是如何被轉發的，其中就涉及到整個Layer 3的運作、Router的結構等等的內容。</p>
 <section id="overview-of-network">
 <h2>4.1 Overview of Network<a class="headerlink" href="#overview-of-network" title="本標頭的永久連結"></a></h2>
-<p>對於Layer 4, 他所服務的對象就是Application, 所以是process到process，而對於這章所要教的Layer 3，他所服務的是host到host，想辦法從來源host丟到目標host。</p>
-<p><strong>network-layer functions:</strong>
-forwarding:單機上，從第幾個port轉到第幾個port出去（感覺像一個圓環），難在速度要很快</p>
-<p>routing:找出一條路徑，可以走到目的地（就是個交通路網，包含很多圓環），難在要瞬間決定好路徑</p>
-<p>datagrams:常常說的『封包』，就是指Layer 3的</p>
-<p>Layer 3 的運作（IP）是綁在網卡身上，不是在host身上，雖然口語上都是說host to host</p>
-<p>data plane:
-封包來得時候，實際上forward的方式</p>
-<p>control plane:
-在封包來之前，所做的所有的設定</p>
-<p>兩種control plane的方式</p>
+<p>對於Layer 4 (Transport Layer), 他所服務的對象就是Application, 所以是process到process，而對於這章所要教的Layer 3 (Network Layer)，他所服務的是host到host，想辦法從來源host丟到目標host。</p>
+<p><strong>network-layer functions:</strong></p>
 <ol class="simple">
-<li><p>traditional routing algorithms:</p></li>
-<li><p>software -defined networking(SND):</p></li>
+<li><p>forwarding：在一個Router上，從第幾個port轉到第幾個port出去（感覺像一個圓環），難在速度要很快</p></li>
+<li><p>routing：在Router海中找出一條路徑，可以走到目的地（就是個交通路網，包含很多圓環），難在要瞬間決定好路徑</p></li>
 </ol>
-<p>Routing Algorithm 會確認一下這個router的鄰居有誰，接著產生一個forwarding table出來。</p>
-<p>host身上也有forwarding table，不過通常目標就ADSL，很單純</p>
-<p>SDN直接有個中心，直接把大家的table 算好，之後再把table分別傳送給大家，理論上不可行，但假如有個機構管理了一大堆的路由器，那就可以用SND，缺點是有限制，優點是算的camacity比較小，也比較快可以一起算好。</p>
-<p>注意，基本上封包掉了就掉了，Layer 3 不會重傳一次，重傳是由Layer 4去處理（或不傳）。</p>
-<p>還有，datagrame 不一定會依照順序抵達，有可能是234先到，1才抵達。</p>
-<p>也沒有minimum 的 branch</p>
-<p>基本上現在Layer 3 就剩IP，以前可能有其他的Layer 3 Protocal有提供順序、調封包的一些服務，但被淘汰了。</p>
+<blockquote>
+<div><p>datagrams:常常說的『封包』，就是指Layer 3的</p>
+</div></blockquote>
+<blockquote>
+<div><p>Layer 3 的運作（IP）是綁在網卡身上，不是在host身上，雖然口語上都是說host to host</p>
+</div></blockquote>
+<p><strong>Data plane, Control plane</strong></p>
+<p>上面我們有提到forwarding 和 routing，而這兩件事情分別對應data plane和control plane。</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://www.netadmin.com.tw/netadmin/zh-tw/technology/8BFD6B13235240FCA365BC54C967294B">網管人參考</a></p></li>
+<li><p><a class="reference external" href="https://www.syscom.com.tw/ePaper_New_Content.aspx?id=473&amp;EPID=212&amp;TableName=sgEPArticle">電腦科技電子報</a></p></li>
+</ol>
+<p>在網路中要怎麼決定forwarding 和 routing?我們有兩種方式：</p>
+<ul class="simple">
+<li><p>Traditional routing algorithm:</p>
+<ul>
+<li><p>每個router在正式傳送資料之前，會先確定自己的拓普（鄰居有誰，接著產生自己的forwarding table，整個網路依照Router的指示一直走。</p></li>
+</ul>
+</li>
+<li><p>SDN(Softwar-Defined Networking)</p>
+<ul>
+<li><p>在SDN裡面，我們會把分成兩種plane:</p>
+<ul>
+<li><p>Data plane: local, per-router function, 讓硬體去專心處理怎麼讓forwarding 變快</p></li>
+<li><p>Control plane: 決定整個資料route的路徑，在SDN裡面才能夠實現的架構，因為有一個中央電腦，知道所有路由器的拓普，因此可以交給軟體去做計算</p></li>
+</ul>
+</li>
+<li><p><img alt="SDN" src="../../_images/4_1-1.png" /></p></li>
+</ul>
+</li>
+</ul>
+<p>優缺點：</p>
+<ol class="simple">
+<li><p>SDN直接有個中心，直接把大家的table 算好，之後再把table分別傳送給大家，理論上不可行，但假如有個機構管理了一大堆的路由器，那就可以用SND，缺點是有限制，優點是算的capacity比較小，也比較快可以一起算好。</p></li>
+</ol>
+<blockquote>
+<div><p>host身上也有forwarding table，不過通常目標就ADSL，很單純</p>
+</div></blockquote>
+<p>「注意」</p>
+<ol class="simple">
+<li><p>基本上封包掉了就掉了，Layer 3 不會重傳一次，重傳是由Layer 4去處理（或不傳）。</p></li>
+<li><p>datagrame 不一定會依照順序抵達，有可能是234先到，1才抵達。</p></li>
+<li><p>沒有minimum 的 branch</p></li>
+<li><p>基本上現在Layer 3 就剩IP，以前可能有其他的Layer 3 Protocal有提供順序、調封包的一些服務，但被淘汰了。</p></li>
+</ol>
 </section>
 <section id="what-s-inside-a-router">
 <h2>4.2 What』s Inside a Router?（跟資管沒關係，當作科普）<a class="headerlink" href="#what-s-inside-a-router" title="本標頭的永久連結"></a></h2>
-<p>裡面的結構是一堆繼電路。</p>
-<p>1片的大小成為1U，大一點的機器一台可能佔用2U,3U的空間</p>
+<p><img alt="router" src="../../_images/4_2-1.jpeg" /></p>
+<p>1片的大小叫做1U，大一點的機器一台可能佔用2U,3U的空間</p>
 <p>實際上某個東西進來會從任意Port出去，課本為了簡化都從左到右</p>
-<p>routing processor(software):主要來幫忙management control plane之類的</p>
-<p>forwarding data plane(hardware): operation in nano second</p>
-<p>把port到port的動作叫做switching，要比外面的線路傳輸速度還快，不然理論上會卡住</p>
+<p><img alt="high-level view of heneric router architecture:" src="../../_images/4_2-2.png" /></p>
+<ul class="simple">
+<li><p>routing processor(software)</p>
+<ul>
+<li><p>operates in millisecond time frame</p></li>
+</ul>
+</li>
+<li><p>forwarding data plane(hardware)</p>
+<ul>
+<li><p>operates in nanosecond time frame，總之一定要比上面還快</p></li>
+</ul>
+</li>
+</ul>
 <p><strong>Input port function</strong></p>
-<p>綠色(bit)       ：Layer 1
-藍色(frame)     ：Layer 2
-紅色(datagrame) ：Layer 3, lookup, forwarding</p>
-<p>在進到switch fabric 之前該做的事情</p>
-<p><strong>switching memory</strong></p>
-<p>中間是用memory當作連接，利用bus來傳輸</p>
-<p><strong>switchin via a bus</strong></p>
-<p>memory放在每一個port的最後，直接用bus傳到另一個人的memory</p>
-<p>這樣的結構會產生的問題是會有佔用的問題。</p>
-<p><strong>Switching via interconnection network</strong></p>
-<p>既然會佔用，那就多來幾個bus</p>
-<p><strong>Head-of-the-Line(HOL) blocking</strong></p>
-<p>由於有被佔用的問題，所以第一個排隊的會卡住後面那個</p>
-<p><strong>output port queuing</strong></p>
-<p>有可能port的線路不夠快，所以output也會有個queuing</p>
+<p>這個部分可以想像成：在進到圓環之前，要先通過一些步驟</p>
+<p><img alt="input" src="../../_images/4_2-3.png" /></p>
+<ol class="simple">
+<li><p>綠色(bit)       ：Layer 1</p></li>
+<li><p>藍色(frame)     ：Layer 2</p></li>
+<li><p>紅色(datagrame) ：Layer 3, lookup, forwarding</p></li>
+</ol>
+<p>switch fabric: 指的是圓環本人，以下有一些途徑</p>
+<ul class="simple">
+<li><p>Switching via <strong>memory</strong></p>
+<ul>
+<li><p>中間是用memory當作連接，利用bus來傳輸</p></li>
+<li><p><img alt="memory" src="../../_images/4_2-4.png" /></p></li>
+</ul>
+</li>
+<li><p>Switching via a <strong>bus</strong></p>
+<ul>
+<li><p>memory放在每一個port的最後，直接用bus傳到另一個人的memory</p></li>
+<li><p>這樣的結構會產生的問題是會有佔用的問題。</p></li>
+<li><p><img alt="bus" src="../../_images/4_2-5.png" /></p></li>
+</ul>
+</li>
+<li><p>Switching via <strong>interconnection network</strong></p>
+<ul>
+<li><p>既然會佔用，那就多來幾個bus</p></li>
+<li><p><img alt="interconnection network" src="../../_images/4_2-6.png" /></p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Queuing</strong></p>
+<ul class="simple">
+<li><p>Input port queuing</p>
+<ul>
+<li><p>如果switch fabric 太慢，那input就會塞車</p></li>
+<li><p>HOL(Head-of-the-Line) blocking:兩個port都要傳到port 1, 但後面那個人可以去沒人要的port 2</p></li>
+</ul>
+</li>
+<li><p>Output port queuing</p>
+<ul>
+<li><p><img alt="output queuing" src="../../_images/4_2-7.png" /></p></li>
+<li><p>有可能port的線路不夠快，所以output也會有個queuing</p></li>
+<li><p>我們在意那個output的buffer</p></li>
+<li><p>通常queueing delay and loss 是因為output port buffer overflow</p></li>
+</ul>
+</li>
+</ul>
 <blockquote>
 <div><p>注意：這邊的server只是表示他要服務第一個來排隊的人</p>
 </div></blockquote>
-<p>基本上排隊是用FIFO，特別的事可能會有兩種queue，但只有一個server</p>
+<section id="packet-scheduling">
+<h3>Packet Scheduling<a class="headerlink" href="#packet-scheduling" title="本標頭的永久連結"></a></h3>
+<p>RT，就是決定Packet該怎麼送出去，基本上排隊是用FIFO，特別的是可能會有兩個queue，但只有一個server</p>
+<p><strong>Priority</strong></p>
+<p><img alt="priority" src="../../_images/4_2-8.png" /></p>
+<p>指的是分為兩種queue，一種是high priority queue，另一個是低的。</p>
 <p>backlog, starving 指的是一直服務priority 高的，導致priority低的送不出去，但通常只會在家裡有這個機制，router海不做這件事情。</p>
 <p><strong>Round Robin(RR)</strong></p>
-<p>輪流的意思，重點是Weighted Fair Queuing(WFQ)，在不同的queuuing有不同的weight，長時間來看就可以有一點點proiority。</p>
+<p>把queue分為多種，server輪流處理</p>
+<p><img alt="../../_images/4_2-9.png" src="../../_images/4_2-9.png" /></p>
+<p>重點是Weighted Fair Queuing(WFQ)，在不同的queuuing有不同的weight，長時間來看就可以有一點點proiority。</p>
+</section>
 </section>
 <section id="the-internet-protocol-ip-ipv4-addressing-ipv6-and-more">
 <h2>4.3 The Internet Protocol (IP): IPv4, Addressing, IPv6, and More<a class="headerlink" href="#the-internet-protocol-ip-ipv4-addressing-ipv6-and-more" title="本標頭的永久連結"></a></h2>
-<p>Router真正開始運作之前會先跑 Path-selection algorithms，並且生出forwarding table 出來，control plan 的事情</p>
-<p>ICMP：防止router翻車</p>
-<p>整張圖是一個完整的datagrame，下面的部分是segement，也就是H4</p>
-<p>上面的五行是固定的，下面有options但是通常用不到</p>
-<p>type of servicie: 本來是設計來插隊了，</p>
-<p>TTL:每經過一站就會減一，常常初始值是128 or 64，假如它被扣完了，router應該要直接丟掉（畢竟實際上最多也才十幾個站就該到了）</p>
-<p>upper layer:用來表示放在segement是哪位，假如是TCP是6，UDP是17，1是ICMP(除錯用，是Layer 3但是放在segement那邊)</p>
+<p><img alt="../../_images/4_3-1.png" src="../../_images/4_3-1.png" /></p>
+<p>這個章節，我們將會看到Network Layer大致上會做些什麼，上圖就是一個感覺：）</p>
+<p>Router真正開始運作之前會先跑 Path-selection algorithms，並且生出forwarding table 出來，也就是control plan 的事情，ICMP這個Protocal是防止router翻車用的</p>
+<p><strong>Datagram format</strong></p>
+<p><img alt="datagram" src="../../_images/4_3-2.png" /></p>
+<p>整張圖是一個完整的datagrame，下面的部分是segement，也就是上一個章節討論的Layer 4，上面的五行是固定的，下面有options但是通常用不到，以下是一些小部分的介紹：</p>
+<ol class="simple">
+<li><p>type of servicie: 本來是設計來插隊了，</p></li>
+<li><p>TTL:每經過一站就會減一，常常初始值是128 or 64，假如它被扣完了，router應該要直接丟掉（畢竟實際上最多也才十幾個站就該到了）</p></li>
+<li><p>upper layer:用來表示放在segement是哪位，假如是TCP是6，UDP是17，1是ICMP(除錯用，是Layer 3但是放在segement那邊)</p></li>
+</ol>
+<p><strong>fragmentation/reassembly</strong></p>
+<p>在網路世界中，總有幾個比較弱的Router，會因為能處理的數據量太小，導致大封包過不去，但又沒有辦法叫Client從頭送一個小一點的封包過來（上一章有討論過），所以Router會自己判斷下一個Router的承載量怎麼樣，並且把它切一切。</p>
+<p><img alt="../../_images/4_3-3.png" src="../../_images/4_3-3.png" /></p>
 <p>MTU指的是可以容納的封包的大小，今天我們有BCD，其中C的MTU最小</p>
 <p>B知道C的狀況，所以B會把封包切一切，這個動作叫做(fragmentation)，而到了D，他會對這些封包作reassembly，把它們塞回去。</p>
 <p>以下是個範例我們該怎麼切，其中每個人的header都要在，所以要特別注意，header佔20 byte。</p>
+<p><img alt="../../_images/4_3-4.png" src="../../_images/4_3-4.png" /></p>
 <p>fraglag指的是後面還有沒有，假如是1代表它不是最後一個，假如是0代表它是最後一個，可以重組了。</p>
-<p>offset: 8 bytes</p>
-<p>子網路的邊界是router</p>
-<p>switch 是 layer 2 的設備</p>
-<p>CIDR:Classless InterDomain Routing</p>
-<p>DHCP: Dynamic Host Configuration Protocol</p>
-<p>假如你還沒有ip但要跟subnet裡面的人溝通的時候該怎麼辦？</p>
-<p>broadcast: 給所有機器知道資訊，通常不需要的會丟掉</p>
+<p>offset:用來計算這個封包是從第幾個offset開始的，而一個offset有8bytes</p>
+<section id="ip-addressing">
+<h3>IP addressing<a class="headerlink" href="#ip-addressing" title="本標頭的永久連結"></a></h3>
+<p>在網路世界裡面，IP就像是每台機器（網卡）的地址，這個小節就是要來介紹一些跟IP有關的一些機制</p>
+<p><strong>Subnet</strong></p>
+<p>投影片也沒定義很詳細，知道他是以Router為邊界就好，並且他們前面會有一段IP都是一樣的。</p>
+<blockquote>
+<div><p>注意：switch 是 layer 2 的設備，不要弄錯</p>
+</div></blockquote>
+<p><strong>CIDR(Classless InterDomain Routing)</strong></p>
+<p>白癡作業考了一大堆，通常IP是長這個樣子：a.b.c.d/x，其中，那個x就代表了subnet在整串IP裡面佔了多少</p>
+<p><img alt="../../_images/4_3-5.png" src="../../_images/4_3-5.png" /></p>
+<p>計算</p>
+<p>假如題目給你一個IP還有一串mask，都寫出來然後取交集就對了，原理未知。</p>
+<p><img alt="../../_images/4_3-6.png" src="../../_images/4_3-6.png" /></p>
+<p><strong>DHCP(Dynamic Host Configuration Protocol)</strong></p>
+<p>這個Protocal主要是讓DHCP Server可以分發IP給新來的朋友，另外，他好像是個Layer 7 的Protocal</p>
+<p>但問題來了，你沒有IP的話，你要怎麼跟DHCP的Server溝通呢？他也是網路的一個人，因此你要想辦法在沒有IP的情況下跟它溝通，以下會介紹機制</p>
+<p><img alt="../../_images/4_3-7.png" src="../../_images/4_3-7.png" /></p>
+<p>一開始，Client會把自己的IP設定為0.0.0.0(unknown)，並且用Broadcast的方式來找DHCP Server</p>
+<p>找到之後，DHCP Server會把空的IP給Client，接著會再有兩段式的確認，以下是他們的wire shark</p>
+<p><img alt="../../_images/4_3-8.png" src="../../_images/4_3-8.png" /></p>
+</section>
+<section id="nat-network-address-translation">
+<h3>NAT(Network address translation)<a class="headerlink" href="#nat-network-address-translation" title="本標頭的永久連結"></a></h3>
+<p>主要就是當初設計網路的時候設計了Private IP，但在這之中要怎麼跟其他有public IP 的host互相溝通，這就是NAT 要處理的事情，以下就是所有的過程</p>
+<p><img alt="../../_images/4_3-9.png" src="../../_images/4_3-9.png" /></p>
+<ol class="simple">
+<li><p>有個有Private IP的人想要發送給某個外面的人，它先用Private IP 和正常的Port發送出去，並且被NAT看到</p></li>
+<li><p>NAT先把這個Private IP記載NAT translation table裡面，並且給它一個port，並且把封包裡面的IP改成public IP(然後也記載在table裡面)，接著發送給server</p></li>
+<li><p>server丟回來，NAT看一下表，有沒有符合的port，有的話就接收</p></li>
+<li><p>把response裡面的目標ip改成private ip</p></li>
+</ol>
+</section>
+<section id="ipv6">
+<h3>IPv6<a class="headerlink" href="#ipv6" title="本標頭的永久連結"></a></h3>
+<p>總之老師很簡單的講過去了，我們要來看一下當IPv6傳送的中間，遇到了IPv4的router該怎麼辦</p>
+<p><img alt="../../_images/4_3-10.png" src="../../_images/4_3-10.png" /></p>
+</section>
+<section id="id1">
+<h3>老師補充篇<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h3>
+<p>主要參考<a class="reference external" href="https://zh.wikipedia.org/zh-tw/%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C">這篇</a>維基百科</p>
+<p>這是老師畫的圖</p>
+<p><img alt="figure/4-3-1_1" src="../../_images/4_3_1-1.png" /></p>
+<p><strong>分類</strong></p>
+<p>這張圖可以看見，紅色的Class A佔了所有IP的一半，藍色的Class B佔了剩下來一半的一半，綠色的就是一半的一半的一半（Class C）</p>
+<p><strong>各自的特色</strong></p>
+<p>分完類之後，我們會想觀察</p>
+<ol class="simple">
+<li><p>他們是/幾（CIDR裡面的那個，子網路佔了多少部分）</p></li>
+<li><p>他們有幾個host</p></li>
+<li><p>一個subnet裡面有幾個host</p></li>
+</ol>
+<p>這些東西都在這個表格裡面</p>
+<p><img alt="../../_images/4_3_1-2.png" src="../../_images/4_3_1-2.png" /></p>
+<p><strong>Private IP</strong>
+就是老師的圖片裡面，每個Class中都有被切一些黃色的部分，那些就是。</p>
+</section>
 </section>
 <section id="generalized-forwarding-and-sdn">
 <h2>4.4 Generalized Forwarding and SDN<a class="headerlink" href="#generalized-forwarding-and-sdn" title="本標頭的永久連結"></a></h2>
@@ -214,6 +354,7 @@ forwarding:單機上，從第幾個port轉到第幾個port出去（感覺像一�
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="3.html" class="btn btn-neutral float-left" title="Chapter 3. Transport Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="5.html" class="btn btn-neutral float-right" title="Chapter 5 The Network Layer: Control Plane" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

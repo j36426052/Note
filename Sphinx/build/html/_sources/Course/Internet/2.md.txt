@@ -60,7 +60,8 @@ Client端是跟Server溝通的人，通常IP是浮動的。
 
 下表是一些常見的Application和transport的配對
 
-![](figure/2_1-2)
+![figure](figure/2_1-2.png)
+
 
 ## 2.2 The Web and HTTP
 

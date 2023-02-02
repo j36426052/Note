@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Docker 教學 &mdash; testing 0 說明文件</title>
+  <title>Docker 教學 &mdash; QSnake Markdown Note v1 說明文件</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜尋" href="../search.html" />
-    <link rel="next" title="Docs Page" href="../docs/index.html" />
-    <link rel="prev" title="vim 常用按鍵" href="Tool/vim.html" /> 
+    <link rel="next" title="Docker 程式課教學" href="DockerClass.html" />
+    <link rel="prev" title="Linux Page" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> testing
+            <a href="../index.html" class="icon icon-home"> QSnake Markdown Note
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -42,26 +42,33 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">README.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Testin.html">Testin.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Testing.html">Testing.md</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Dev/index.html">Dev Page</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Linux Page</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Tool/index.html">Tool Page</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Docker 教學</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">安裝</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">常見錯誤（讓未來更方便）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">簡介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows-wsl-2-installation-is-incomplete">在windows 上面安裝遇到 WSL 2 installation is incomplete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">快問快答</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">安裝</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">常見錯誤（讓未來更方便）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-network">Docker Network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">指令區</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">新手上路</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">常用指令</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">參考資料</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-compose">Docker Compose</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">開始使用Docker Compose</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-file">Docker file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">常用指令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">參考資料</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DockerClass.html">Docker 程式課教學</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/index.html">Docs Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Course/index.html">Course Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Beauty/index.html">Tool Page</a></li>
 </ul>
 
         </div>
@@ -70,7 +77,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">testing</a>
+          <a href="../index.html">QSnake Markdown Note</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -116,60 +123,182 @@
 <section id="docker">
 <h1>Docker 教學<a class="headerlink" href="#docker" title="本標頭的永久連結"></a></h1>
 <section id="id1">
-<h2>安裝<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h2>
-<section id="id2">
-<h3>常見錯誤（讓未來更方便）<a class="headerlink" href="#id2" title="本標頭的永久連結"></a></h3>
+<h2>簡介<a class="headerlink" href="#id1" title="本標頭的永久連結"></a></h2>
+<p>Docker 就是一個可以把程式專案打包起來的東西，特別之處就是把整個library都包起來了，所以不會有執行的問題</p>
 </section>
+<section id="windows-wsl-2-installation-is-incomplete">
+<h2>在windows 上面安裝遇到 WSL 2 installation is incomplete<a class="headerlink" href="#windows-wsl-2-installation-is-incomplete" title="本標頭的永久連結"></a></h2>
+<p>參考 <a class="reference external" href="https://bbs.huaweicloud.com/blogs/359540">這個</a></p>
+<p>控制台 –&gt; 程式與功能 –&gt; 啟用或關閉 windows 功能 –&gt; 啟用windows 的Linux 子系統</p>
+</section>
+<section id="id2">
+<h2>快問快答<a class="headerlink" href="#id2" title="本標頭的永久連結"></a></h2>
+<p><strong>What is a Container?</strong></p>
+<ul class="simple">
+<li><p>Mostly Linux Base Image, because small in size</p></li>
+<li><p>Application image on top</p></li>
+</ul>
+<p>其中包含</p>
+<ul class="simple">
+<li><p>port binded</p></li>
+<li><p>appplication image</p></li>
+<li><p>virtual file system</p></li>
+</ul>
+<p><strong>Advantage of Layer Structure</strong></p>
+<ul class="simple">
+<li><p>兩個不同Container，可以下載Layer不同的地方就好</p></li>
+</ul>
+<p><strong>Docker Image vs Docker Container</strong>
+Container is a running environment for image</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Docker Image</th>
+<th>Docker Container</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the actual package</td>
+<td>actually start the application</td>
+</tr>
+<tr>
+<td>artifact, that can be moved around</td>
+<td>-</td>
+</tr>
+<tr>
+<td>not running</td>
+<td>running</td>
+</tr>
+</tbody>
+</table><p><strong>Docker vs VM</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Docker</th>
+<th>VM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Application</td>
+</tr>
+<tr>
+<td>-</td>
+<td>OS Kernal</td>
+</tr>
+</tbody>
+</table><p>Advantage in Docker</p>
+<ol class="simple">
+<li><p>Size</p></li>
+<li><p>Speed</p></li>
+<li><p>Compatibility</p></li>
+</ol>
+<p><strong>Container Port vs Host Port</strong>
+<img alt="dockerPort" src="../_images/dockerPort.png" /></p>
+<p>要這樣做port的分配，就要在run的時候指定電腦port和container port</p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="o">[</span><span class="nb">local</span><span class="w"> </span>port<span class="o">]</span>:<span class="o">[</span>container<span class="w"> </span>port<span class="o">]</span>
+</pre></div>
+</div>
 </section>
 <section id="id3">
-<h2>新手上路<a class="headerlink" href="#id3" title="本標頭的永久連結"></a></h2>
-<p>找找酷酷docker</p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker search <span class="o">[</span>IMAGE wnat to search<span class="o">]</span>
-</pre></div>
-</div>
-<p>把docker下載下來</p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker pull <span class="o">[</span>IMAGE want to download<span class="o">]</span>
-</pre></div>
-</div>
-<p>可以用search來找ubuntu。</p>
+<h2>安裝<a class="headerlink" href="#id3" title="本標頭的永久連結"></a></h2>
 </section>
 <section id="id4">
-<h2>常用指令<a class="headerlink" href="#id4" title="本標頭的永久連結"></a></h2>
-<p><strong>察看目前所有image</strong></p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docer image
-</pre></div>
-</div>
-<p><strong>察看目前運行的container(想看全部加上 -a)</strong></p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker ps 
-</pre></div>
-</div>
-<p><strong>新建Container(有名字的那種)</strong></p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker run -it --name <span class="o">[</span>ContainerName<span class="o">]</span> <span class="o">[</span>IMAGE<span class="o">]</span> 
-</pre></div>
-</div>
-<p><strong>啟動Container(ubuntu image要在run的時候加上-it才不會爆炸)</strong></p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker start <span class="o">[</span>ContainerName<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>進入到Container</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="p">[</span><span class="n">ContainerName</span><span class="p">]</span> <span class="p">[</span><span class="n">Command</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>通常command輸入/bin/bash</p>
-<p><strong>關掉Container</strong></p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker stop <span class="o">[</span>ContainerName<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>刪除Container</strong></p>
-<div class="highlight-Docker notranslate"><div class="highlight"><pre><span></span>docker rm <span class="o">[</span>ContainerName<span class="o">]</span>
+<h2>常見錯誤（讓未來更方便）<a class="headerlink" href="#id4" title="本標頭的永久連結"></a></h2>
+</section>
+<section id="docker-network">
+<h2>Docker Network<a class="headerlink" href="#docker-network" title="本標頭的永久連結"></a></h2>
+<p>可以把兩個container放在一樣的token network, 兩個container就可以藉由container name互相溝通</p>
+<section id="id5">
+<h3>指令區<a class="headerlink" href="#id5" title="本標頭的永久連結"></a></h3>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>network<span class="w"> </span>ls<span class="w">                     </span>#列出所有docker網路
+docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span><span class="o">[</span>networkName<span class="o">]</span><span class="w">   </span>#建立一個新docker網路
+docker<span class="w"> </span>run<span class="w"> </span>--net<span class="w"> </span><span class="o">[</span>networkName<span class="o">]</span><span class="w">        </span>#建立container時指定在哪個網路裡面
 </pre></div>
 </div>
 </section>
-<section id="id5">
-<h2>參考資料<a class="headerlink" href="#id5" title="本標頭的永久連結"></a></h2>
+</section>
+<section id="docker-compose">
+<h2>Docker Compose<a class="headerlink" href="#docker-compose" title="本標頭的永久連結"></a></h2>
+<p>假如原本要建立三個Container，設定好一些參數之後並且互相溝通，那我們原本要先分別打建立的程式碼、設定好port, env之類的，接著要把所有Container放在同一個網路裡面，Docker Compose就是解決了這種不方便的地方。</p>
+<p>首先，docker compose 有個yaml檔案，裡面有一些資訊</p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>version:<span class="s1">&#39;3&#39;</span><span class="w">     </span>#docker<span class="w"> </span>compose<span class="w"> </span>的版本
+services:<span class="w">       </span>#記錄有哪些container
+<span class="w">  </span>mongodb:<span class="w">      </span>#其中的一個container
+<span class="w">    </span>image:monge<span class="w"> </span>#container
+<span class="w">    </span>ports:
+<span class="w">      </span>-27017:2u017<span class="w">  </span>#對應到<span class="w"> </span>-p<span class="w"> </span><span class="m">27017</span>:27017
+<span class="w">    </span>environment:
+<span class="w">      </span>-MONGO...<span class="w">     </span>#對應到<span class="w"> </span>-e<span class="w"> </span>MONGO...
+<span class="w">    </span>...
+<span class="w">  </span>monge-express:
+<span class="w">    </span>image:mongo-express
+</pre></div>
+</div>
+<section id="id6">
+<h3>開始使用Docker Compose<a class="headerlink" href="#id6" title="本標頭的永久連結"></a></h3>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>-f<span class="w"> </span><span class="o">[</span>ymal<span class="w"> </span>file<span class="o">]</span><span class="w"> </span>up<span class="w">    </span>#其中-f代表指定file，up代表啟動所有在ymal的container
+docker-compose<span class="w"> </span>-f<span class="w"> </span><span class="o">[</span>ymal<span class="w"> </span>file<span class="o">]</span><span class="w"> </span>down<span class="w">  </span>#跟up相反
+</pre></div>
+</div>
+</section>
+</section>
+<section id="docker-file">
+<h2>Docker file<a class="headerlink" href="#docker-file" title="本標頭的永久連結"></a></h2>
+<p>用來建立自己的image用</p>
+</section>
+<section id="id7">
+<h2>常用指令<a class="headerlink" href="#id7" title="本標頭的永久連結"></a></h2>
+<p><strong>新手上路</strong></p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>search<span class="w"> </span><span class="o">[</span>IMAGE<span class="w"> </span>wnat<span class="w"> </span>to<span class="w"> </span>search<span class="o">]</span><span class="w"> </span>#<span class="w"> </span>找找酷酷docker
+docker<span class="w"> </span>pull<span class="w"> </span><span class="o">[</span>IMAGE<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>download<span class="o">]</span><span class="w"> </span>#<span class="w"> </span>把docker下載下來
+docker<span class="w"> </span>image<span class="w">    </span>#察看目前所有image*
+docker<span class="w"> </span>ps<span class="w">       </span>#察看目前運行的container<span class="o">(</span>想看全部加上<span class="w"> </span>-a<span class="o">)</span>*
+</pre></div>
+</div>
+<p><strong>新建Container(有名字的那種，ubuntu image 在run要加上-it)</strong></p>
+<p>其中，run是『建立』一個container，start是啟動一個沒在動的container</p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span><span class="o">[</span>ContainerName<span class="o">]</span><span class="w"> </span><span class="o">[</span>IMAGE<span class="o">]</span><span class="w"> </span>
+
+<span class="c"># 透過 iamge 執行並產生一個新的 container</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span><span class="o">[</span>Image<span class="w"> </span>名稱<span class="o">]</span>:<span class="o">[</span>Image<span class="w"> </span>版本<span class="o">]</span><span class="w"> </span><span class="o">[</span>執行指令<span class="o">]</span>
+
+<span class="c"># ex:</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>ubuntu<span class="w"> </span>/bin/echo<span class="w"> </span><span class="s2">&quot;example 1 - ubuntu&quot;</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>ubuntu:14.04<span class="w"> </span>/bin/echo<span class="w"> </span><span class="s2">&quot;example 2 - ubuntu:14.04&quot;</span>
+
+<span class="c">########### 我是分隔線 ###########</span>
+
+<span class="c"># [OPTIONS]:</span>
+<span class="c"># -i, --interactive (互動模式)</span>
+<span class="c"># -t, --tty         (配置一個終端機)</span>
+<span class="c"># -d, --detach      (在背景執行)</span>
+
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span><span class="o">[</span>Image<span class="w"> </span>名稱<span class="o">]</span>:<span class="o">[</span>Image<span class="w"> </span>版本<span class="o">]</span><span class="w"> </span><span class="o">[</span>執行指令<span class="o">]</span>
+
+<span class="c"># ex:</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>-t<span class="w"> </span>ubuntu:14.04<span class="w"> </span>bash
+$<span class="w"> </span>exit
+</pre></div>
+</div>
+<p><strong>啟動有的沒的(ubuntu image要在run的時候加上-it才不會爆炸)</strong></p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>start<span class="w"> </span><span class="o">[</span>ContainerName<span class="o">]</span><span class="w">                </span>#啟動container
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span><span class="o">[</span>ContainerName<span class="o">]</span><span class="w"> </span><span class="o">[</span>Command<span class="o">]</span><span class="w">   </span>#進入container<span class="w"> </span>#通常command<span class="w"> </span>輸入<span class="w"> </span>/bin/bash
+docker<span class="w"> </span>stop<span class="w"> </span><span class="o">[</span>ContainerName<span class="o">]</span><span class="w">                 </span>#關掉Container
+docker<span class="w"> </span>rm<span class="w"> </span><span class="o">[</span>ContainerName<span class="o">]</span><span class="w">                   </span>#刪除Container
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h2>參考資料<a class="headerlink" href="#id8" title="本標頭的永久連結"></a></h2>
 <ol class="simple">
 <li><p><a class="reference external" href="https://github.com/twtrubiks/docker-tutorial">Docker</a></p></li>
 <li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10187192">合併Docker-Dockerfile</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=3c-iBn73dDE&amp;ab_channel=TechWorldwithNana">Docker 影片教學</a></p></li>
+<li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10191016">Docker File教學</a></p></li>
 </ol>
 </section>
 </section>
@@ -178,8 +307,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="Tool/vim.html" class="btn btn-neutral float-left" title="vim 常用按鍵" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../docs/index.html" class="btn btn-neutral float-right" title="Docs Page" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Linux Page" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="DockerClass.html" class="btn btn-neutral float-right" title="Docker 程式課教學" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

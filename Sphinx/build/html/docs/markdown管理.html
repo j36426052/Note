@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Markdown管理 &mdash; testing 0 說明文件</title>
+  <title>Markdown管理 &mdash; QSnake Markdown Note v1 說明文件</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> testing
+            <a href="../index.html" class="icon icon-home"> QSnake Markdown Note
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -42,9 +42,6 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">README.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Testin.html">Testin.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Testing.html">Testing.md</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Dev/index.html">Dev Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Linux/index.html">Linux Page</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Docs Page</a><ul class="current">
@@ -59,7 +56,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id2">3. 支援Markdown</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#latex">4. 支援LaTeX(待補)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id3">5. 常用方法</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github">6. 丟到Github</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-read">6. 丟到Github + read</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#makefile">MakeFile</a></li>
@@ -68,6 +65,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Course/index.html">Course Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Beauty/index.html">Tool Page</a></li>
 </ul>
 
         </div>
@@ -76,7 +74,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">testing</a>
+          <a href="../index.html">QSnake Markdown Note</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -143,15 +141,15 @@
 <li><p><a class="reference external" href="https://catx4.gitbooks.io/ossf_epaper_collection/content/APP/Apps-201307-Sphinx.html">參考toc(中文)</a></p></li>
 </ol>
 <p>一開始要裝的東西（用mac裝，我全部改成用homebrew）</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install git
-sudo apt install make
-sudo apt install python3
-sudo apt install python3-pip 
-pip3 install -U Sphinx
-pip3 install sphinx-autobuild
-pip3 install sphinx_rtd_theme
-pip3 install recommonmark
-pip3 install sphinx_markdown_tables
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>make
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
+pip3<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>Sphinx
+pip3<span class="w"> </span>install<span class="w"> </span>sphinx-autobuild
+pip3<span class="w"> </span>install<span class="w"> </span>sphinx_rtd_theme
+pip3<span class="w"> </span>install<span class="w"> </span>recommonmark
+pip3<span class="w"> </span>install<span class="w"> </span>sphinx_markdown_tables
 </pre></div>
 </div>
 <p>先在桌面建立一個Sphinx資料夾，terminal進到裡面之後執行 sphinx-quickstart</p>
@@ -164,7 +162,7 @@ pip3 install sphinx_markdown_tables
 <li><p>專案語言：zh_TW</p></li>
 </ol>
 <p>建立完之後的結構：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">Makefile</span>      
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">Makefile</span>
 <span class="o">--</span><span class="n">build</span>
 <span class="o">--</span><span class="n">make</span><span class="o">.</span><span class="n">bat</span>
 <span class="o">--</span><span class="n">source</span>
@@ -226,8 +224,14 @@ pip3 install sphinx_markdown_tables
 </div>
 <p>基本上在每個資料夾都放一個index，假如那層資料夾裡面有東西就寫個*符號</p>
 </section>
-<section id="github">
-<h3>6. 丟到Github<a class="headerlink" href="#github" title="本標頭的永久連結"></a></h3>
+<section id="github-read">
+<h3>6. 丟到Github + read<a class="headerlink" href="#github-read" title="本標頭的永久連結"></a></h3>
+<ol class="simple">
+<li><p>丟到github，然後在gitignore裡面把build/加進去</p></li>
+<li><p>註冊 <a class="reference external" href="https://readthedocs.org/">read the docs</a></p></li>
+<li><p>在丟到read the docs之前，記得在根目錄加上requirment.txt, 把extensions裡面的東西加進去</p></li>
+<li><p>丟上read the docs, 大功告成</p></li>
+</ol>
 <blockquote>
 <div><p>修改完conf.py之後都要執行一次make html</p>
 </div></blockquote>

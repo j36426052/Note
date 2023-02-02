@@ -5,5 +5,5 @@ Linux Page
    :maxdepth: 1
    :glob:
 
-   Tool/index
+   
    *

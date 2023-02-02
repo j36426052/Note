@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dockerSetup.md &mdash; testing 0 說明文件</title>
+  <title>dockerSetup.md &mdash; QSnake Markdown Note v1 說明文件</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -23,7 +23,7 @@
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜尋" href="../../search.html" />
     <link rel="next" title="Linux Page" href="../../Linux/index.html" />
-    <link rel="prev" title="Graduate Page" href="index.html" /> 
+    <link rel="prev" title="RabbitMQ 開發文件" href="RabbitMQ.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> testing
+            <a href="../../index.html" class="icon icon-home"> QSnake Markdown Note
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -42,16 +42,12 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">README.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Testin.html">Testin.md</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Testing.html">Testing.md</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Dev Page</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Graduate Page</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="RabbitMQ.html">RabbitMQ 開發文件</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">dockerSetup.md</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#docker">個別使用Docker安裝的細節</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#prometheus-grafana">分別串接到Prometheus + Grafana</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#docker-composer">docker composer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prometheus-node-exporter-grafana">建立Prometheus, Node exporter 以及 Grafana</a></li>
 </ul>
 </li>
 </ul>
@@ -61,6 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Linux/index.html">Linux Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">Docs Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Course/index.html">Course Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Beauty/index.html">Tool Page</a></li>
 </ul>
 
         </div>
@@ -69,7 +66,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">testing</a>
+          <a href="../../index.html">QSnake Markdown Note</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -120,30 +117,208 @@
 <blockquote>
 <div><p>這份文件主要記錄關於畢業專題，把整個專案架構弄好的一個說明文件，主要是用docker把以下圖片的架構分別裝好，再用composer把它組起來</p>
 </div></blockquote>
+<p><strong>先備知識</strong></p>
+<ol class="simple">
+<li><p>先知到Docker Compose相關</p></li>
+</ol>
+<p><strong>小筆記</strong></p>
+<ul class="simple">
+<li><p>假如container啟動失敗，用docker logs [containerName]來檢查一下</p></li>
+<li><p>假如需要把資料夾丟進去docker裡面，先用sudo chmod 777 * 修改一下權限</p></li>
+</ul>
 </section>
-<section id="docker">
-<h2>個別使用Docker安裝的細節<a class="headerlink" href="#docker" title="本標頭的永久連結"></a></h2>
-<section id="node">
-<h3>Node<a class="headerlink" href="#node" title="本標頭的永久連結"></a></h3>
+<section id="prometheus-node-exporter-grafana">
+<h2>建立Prometheus, Node exporter 以及 Grafana<a class="headerlink" href="#prometheus-node-exporter-grafana" title="本標頭的永久連結"></a></h2>
+<p>這個部分的安裝，主要希望使用docker-compose自動建立上述三個container，並且事先寫好各自的設定檔案以便互相串接，假如對於docker-compose不熟可以參考：</p>
+<p>其中有幾個好處：</p>
+<ol class="simple">
+<li><p>一勞永逸，把東西設定好之後，只要按下docker-compose 就可以把所有container上線</p></li>
+<li><p>網路方便，使用docker-compose會建立docker網路，container之間不需要使用ip繞來繞去，直接用container name當作ip互相溝通</p></li>
+</ol>
+<section id="prometheus">
+<h3>Prometheus<a class="headerlink" href="#prometheus" title="本標頭的永久連結"></a></h3>
+<p><strong>簡介</strong></p>
+<p>Prometheus主要是Time Series的資料庫，在這次的重點是當作其他container以及grafana的橋樑，讓其他container的資訊先彙整到prometheus裡面，接著grafana再跟promethues拿取資料</p>
+<p><strong>參考資料：</strong>
+<a class="reference external" href="https://ithelp.ithome.com.tw/articles/10269989">架設普羅米修斯(0)</a></p>
+<p>我們直接使用Docker-compose的方式建立container，因此先建立一個docker-compose.yml的檔案，並且在裡面寫上</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>version: &quot;3.8&quot;
+services:
+  prometheus:
+    image: prom/prometheus:v2.30.0
+    volumes:
+      - ./prometheus/config:/etc/prometheus
+      - ./prometheus/data:/prometheus
+    ports:
+      - 9090:9090
+</pre></div>
+</div>
+<p>其中volumes在local上的檔案結構為：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>prometheus/
+├── config
+│   └── prometheus.yml
+└── data
+</pre></div>
+</div>
+<p>其中，promethues.yml主要設定跟其他container架接的情況，等等建立node exporter會更改裡面的內容</p>
+</section>
+<section id="node-exporter">
+<h3>Node exporter<a class="headerlink" href="#node-exporter" title="本標頭的永久連結"></a></h3>
+<p>參考 <a class="reference external" href="https://ithelp.ithome.com.tw/articles/10270805">架設普羅米修斯(1)</a></p>
+<p>在這邊一樣使用同一份docker-compose.yml檔案，並在裡面的service加上以下的資訊，以加上node-exporter這個container</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>node-exporter:
+  image: prom/node-exporter:v1.2.2
+  restart: unless-stopped
+  volumes:
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /:/rootfs:ro
+  command: 
+    - &#39;--path.procfs=/host/proc&#39;
+    - &#39;--path.rootfs=/rootfs&#39;
+    - &#39;--path.sysfs=/host/sys&#39;
+    - &#39;--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)&#39;
+    - &#39;--no-collector.arp&#39;
+    - &#39;--no-collector.netstat&#39;
+    - &#39;--no-collector.netdev&#39;
+    - &#39;--no-collector.softnet&#39;
+</pre></div>
+</div>
+<p>接著，我們要對prometheus裡面的prometheus.yml裡面加上node exporter這個target:</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>scrape_configs:
+  - job_name: node
+    static_configs: 
+      - targets: [&quot;node-exporter:9100&quot;]
+</pre></div>
+</div>
+<p>基本上就大功告成</p>
+<blockquote>
+<div><p>可以注意到targets裡面我們是使用node-exporter當作名字，這是docker-compose的功勞</p>
+</div></blockquote>
+</section>
+<section id="grafana">
+<h3>Grafana<a class="headerlink" href="#grafana" title="本標頭的永久連結"></a></h3>
+<p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10272141">建立Grafana教學</a></p>
+<p>同上，一開始先在docker-compose.yml裡面新增關於grafana:這個container的相關資訊：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grafana</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">grafana</span><span class="o">/</span><span class="n">grafana</span><span class="p">:</span><span class="mf">8.1.5</span>
+  <span class="n">restart</span><span class="p">:</span> <span class="n">unless</span><span class="o">-</span><span class="n">stopped</span>
+  <span class="n">volumes</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">./</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span>
+  <span class="n">ports</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="mi">3000</span><span class="p">:</span><span class="mi">3000</span>
+</pre></div>
+</div>
+<p>這邊介紹一下grafana內部的結構，在/etc/grafana/provisioning裡面，可以設定兩個重要的東西</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>|-- provisioning
+        |-- dashboards
+        |   `-- dashboard.yml
+        `-- datasources
+            `-- datasource.yml
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>datasources<br>
+主要是用來紀錄資料來源，在這邊我們設定普羅米修斯當作資料來源就好</p></li>
+<li><p>dashboards<br>
+主要用來紀錄有沒有預載的dashboard</p></li>
+</ol>
+<p>因此我們在docker compose的資料夾裡面新增grafana/provisioning，並且在docker-compose.yml 裡面，放入</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">volumes</span><span class="p">:</span>
+  <span class="o">-</span> <span class="o">.</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioniog</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span>
+</pre></div>
+</div>
+<p>為了啟動就客制化自己的grafana，我們把一些設定先寫進兩個yaml裡面。</p>
+<p>參考的資料有：
+<a class="reference external" href="https://medium.com/swlh/easy-grafana-and-docker-compose-setup-d0f6f9fcec13">客制化yaml</a> ，裡面給了上述的結構圖，以及
+<a class="reference external" href="https://github.com/vegasbrianc/prometheus/blob/master/grafana/provisioning/datasources/datasource.yml">promethus</a>的datasource設定</p>
+<p>基本上datasource的設定就把上面的東西拷貝下來就好</p>
+<p><strong>dashboards</strong></p>
+<p>首先，先複製一下客制化yaml裡面的dashboards的yml</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config file version</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+
+<span class="nt">providers</span><span class="p">:</span>
+<span class="c1"># &lt;string&gt; an unique provider name</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My Dashboard</span>
+<span class="w">  </span><span class="c1"># &lt;int&gt; org id. will default to orgId 1 if not specified</span>
+<span class="w">  </span><span class="nt">org_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="c1"># &lt;string, required&gt; name of the dashboard folder. Required</span>
+<span class="w">  </span><span class="nt">folder</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">  </span><span class="c1"># &lt;string, required&gt; provider type. Required</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;file&#39;</span>
+<span class="w">  </span><span class="c1"># &lt;bool&gt; disable dashboard deletion</span>
+<span class="w">  </span><span class="nt">disableDeletion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="c1"># &lt;bool&gt; enable dashboard editing</span>
+<span class="w">  </span><span class="nt">editable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># &lt;int&gt; how often Grafana will scan for changed dashboards</span>
+<span class="w">  </span><span class="nt">updateIntervalSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="c1"># &lt;bool&gt; allow updating provisioned dashboards from the UI</span>
+<span class="w">  </span><span class="nt">allowUiUpdates</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># &lt;string, required&gt; path to dashboard files on disk. Required</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/grafana/provisioning/dashboards</span>
+<span class="w">    </span><span class="c1"># &lt;bool&gt; use folder names from filesystem to create folders in Grafana</span>
+<span class="w">    </span><span class="nt">foldersFromFilesStructure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>在這之中，只要在意倒數三行的path就好，裡面存放你欲設想要的dashboard，我們可以先在
+<a class="reference external" href="https://grafana.com/grafana/dashboards/">這裡</a></p>
+<p>找到你喜歡的模版，並且下載它的json檔案</p>
+<p>接著把它放到你指定的位子，基本上就大功告成</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>|-- provisioning
+        |-- dashboards
+        |   `-- dashboard.yml
+        |   `-- json here!!!!!!
+        `-- datasources
+            `-- datasource.yml
+</pre></div>
+</div>
+<p>在Node exporter裡面，我們使用的是<a class="reference external" href="https://grafana.com/grafana/dashboards/1860-node-exporter-full/">這個模版</a></p>
 </section>
 <section id="rabbitmq">
 <h3>RabbitMQ<a class="headerlink" href="#rabbitmq" title="本標頭的永久連結"></a></h3>
+<p>參考</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://www.rabbitmq.com/prometheus.html">官方網站看不懂</a></p></li>
+<li><p><a class="reference external" href="https://opensource.dwins.com/?p=463">隨便一篇</a></p></li>
+<li><p><a class="reference external" href="https://blog.51cto.com/erdong/4844362">酷酷乾貨</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rabbitmq/rabbitmq-server/tree/main/deps/rabbitmq_prometheus/docker/grafana/dashboards">官方自己定義的dashboard</a></p></li>
+<li><p><a class="reference external" href="https://lework.github.io/2019/12/24/rabbitmq-monitor/">就這篇了</a></p></li>
+<li><p><a class="reference external" href="https://x-team.com/blog/set-up-rabbitmq-with-docker-compose/">docker compose設定</a></p></li>
+</ol>
+<p>先把Rabbit MQ pull 下來</p>
+<p>一樣把相關的設定寫進去docker composer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rabbitmq</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">rabbitmq</span><span class="p">:</span><span class="mi">3</span><span class="o">-</span><span class="n">management</span><span class="o">-</span><span class="n">alpine</span>
+  <span class="n">container_name</span><span class="p">:</span> <span class="s1">&#39;rabbitmq&#39;</span>
+  <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="mi">5672</span><span class="p">:</span><span class="mi">5672</span>
+      <span class="o">-</span> <span class="mi">15692</span><span class="p">:</span><span class="mi">15692</span>
+  <span class="n">volumes</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">~/.</span><span class="n">docker</span><span class="o">-</span><span class="n">conf</span><span class="o">/</span><span class="n">rabbitmq</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rabbitmq</span><span class="o">/</span>
+      <span class="o">-</span> <span class="o">~/.</span><span class="n">docker</span><span class="o">-</span><span class="n">conf</span><span class="o">/</span><span class="n">rabbitmq</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">rabbitmq</span>
+</pre></div>
+</div>
+<p>如果要手動啟用exportor，輸入</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rabbitmq</span><span class="o">-</span><span class="n">plugins</span> <span class="n">enable</span> <span class="n">rabbitmq_prometheus</span>
+</pre></div>
+</div>
+<p>但我們沒有這麼做，參考<a class="reference external" href="https://github.com/docker-library/rabbitmq/issues/260">這個</a></p>
+<p>在docker compose裡面加入</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">volumes</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s2">&quot;./rabbit_enabled_plugins:/etc/rabbitmq/enabled_plugins&quot;</span>
+</pre></div>
+</div>
+<p>並且加上檔案rabbit_enabled_plugins</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">rabbitmq_prometheus</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>接著跟node exporter一樣，把設定檔加在普羅米修斯的檔案裡面，接著再設定grafana</p>
 </section>
 <section id="python">
 <h3>Python<a class="headerlink" href="#python" title="本標頭的永久連結"></a></h3>
 </section>
-<section id="prometheus">
-<h3>Prometheus<a class="headerlink" href="#prometheus" title="本標頭的永久連結"></a></h3>
-</section>
-<section id="grafana">
-<h3>Grafana<a class="headerlink" href="#grafana" title="本標頭的永久連結"></a></h3>
-</section>
-</section>
-<section id="prometheus-grafana">
-<h2>分別串接到Prometheus + Grafana<a class="headerlink" href="#prometheus-grafana" title="本標頭的永久連結"></a></h2>
-</section>
-<section id="docker-composer">
-<h2>docker composer<a class="headerlink" href="#docker-composer" title="本標頭的永久連結"></a></h2>
 </section>
 </section>
 
@@ -151,7 +326,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="index.html" class="btn btn-neutral float-left" title="Graduate Page" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="RabbitMQ.html" class="btn btn-neutral float-left" title="RabbitMQ 開發文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="../../Linux/index.html" class="btn btn-neutral float-right" title="Linux Page" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -31,7 +31,7 @@
 sudo apt install git
 sudo apt install make
 sudo apt install python3
-sudo apt install python3-pip 
+sudo apt install python3-pip
 pip3 install -U Sphinx
 pip3 install sphinx-autobuild
 pip3 install sphinx_rtd_theme
@@ -52,7 +52,7 @@ pip3 install sphinx_markdown_tables
 
 建立完之後的結構：
 ~~~
---Makefile      
+--Makefile
 --build
 --make.bat
 --source
