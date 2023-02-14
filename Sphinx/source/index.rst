@@ -11,3 +11,4 @@
    docs/index
    Course/index
    Beauty/index
+   Maker/index

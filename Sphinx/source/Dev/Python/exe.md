@@ -1,3 +1,4 @@
+# exe.md
 安装pyinstaller
 首先安装pyinstaller，使用安装命令：pip3 install pyinstaller，如下图所示。
 

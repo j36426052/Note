@@ -131,6 +131,7 @@ extensions = [
 > 修改完conf.py之後都要執行一次make html
 
 
+> 注意，假如make html不能用，那就到Sphinx 那個資料夾，改成使用./make html
 
 ## MakeFile
 
