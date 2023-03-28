@@ -67,6 +67,110 @@ scores = model.evaluate(x_Test_norm, y_TestOneHot)
 print("\t[Info] Accuracy of testing data = {:2.1f}%".format(scores[1]*100.0))
 ~~~
 
+## 超級拆解篇
+
+先看[這個](https://blog.csdn.net/baoxin1100/article/details/107917633)
+是train_on_batch的介紹
+
+kerasF&Q[這裡](https://keras.io/getting_started/faq/#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory)
+
+接下來主要照著以下兩個做
+
+官方API[這裡](https://keras.io/api/models/model_training_apis/)
+官方範例[這裡](https://www.tensorflow.org/guide/keras/writing_a_training_loop_from_scratch)
+(目前)
+
+
+## 進階啟動區
+
+建立requirement.txt
+~~~requirement
+numpy
+keras
+tensorflow
+pika
+~~~
+
+建立Docker file
+~~~dockerfile
+FROM python:3.9-buster
+
+WORKDIR /app
+
+COPY . /app
+
+RUN apt-get update
+
+RUN apt-get install nano
+
+RUN pip install -r requirements.txt
+
+CMD python3 step2.py
+~~~
+
+
+
+建立container
+~~~
+docker run --link rabbitmq:rabbitmq -v D:\Program\Python\rabbitmq\step2:/app -v D:\Program\Python\rabbitmq\volumn\Data:/Data --name step2 worker
+~~~
+
+容器互聯參考[這裡](https://philipzheng.gitbook.io/docker_practice/network/linking)
+
+## 老師補充篇
+
+**關於資料**
+
+Q1: 為什麼要把資料分成 (X_train, y_train), (X_test, y_test)
+A1: 參下面這張表
+
+|  X區域   | Y區域  |
+|  ----  | ----  |
+| X_train  | y_train |
+| X_test  | y_test |
+
+Q2: 為什麼要做 onehot 這件事情
+A2: 因為我們在做的是一個預測類別(category)的事情，所以不應該預測出來一個數字是介於2~3之間之類的
+
+Q3: 為什麼要把資料reshape
+A3: 因為原本的資料是圖片，因此是二維的，但為了符合A1的表格，因此要把它打平
+
+Q4: 為什麼要把資料除以255
+A4: 因為原始的資料有灰階的問題，假如是白色的話都是255，因此矩陣原本都是落在0~255之間的數字。但我們希望算出一個介於0~1之間的數字，因此要把它除以255。
+
+> onehot注意事項：假如直接使用np_utils.to_categorical()這個函數，那它的category不一定如你所料，例如1可能會變成[0,0,0,0,1]之類的，而不是[0,1,0,0,0]
+
+**建立Model篇**
+
+Q1: 為什麼model是用Sequential()
+A1: 這個只是tensorflow的名稱而已，它指的是由左到右一條線的深度學習
+
+Q2: 增加隱藏層時，那些參數分別是甚麼意思
+A2:
+- units         指的是這一層神經元的數目
+- input_dim     指的是一筆input的資料有幾個dimention
+- activation    非線性優化函數，常見的有softmax, relu等等
+
+Q3: 為什麼網路上的範例，最後一層都沒有softmax
+A3: 因為它們在選擇loss function的時候，是塞一個物件，而且那個物件有一個參數是from_logits，預設關閉，打開就會自動加一個softmax上去，可以參考[這裡](https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy)
+
+Q4: 為什麼官網上有三種crossentropy
+A4: 主要是為了不同的input資料所準備
+
+- [SparseCategoricalCrossentropy](https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy#get_config)：會自動幫你做category
+- [BinaryCrossentropy](https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy)：輸入資料是Binary
+- [CategoricalCrossentropy](https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy)：預設你已經onehot進去了
+
+Q5: fit裡面的參數分別是甚麼意思
+A5:
+- validation_split： 指的是把整個資料分為多少比例當作測試用
+- epochs：這坨資料要訓練幾次，例如原本有8萬筆要跑的資料，那假如設定10，那就會變成80萬筆
+- batch_size：一次調整weigh要丟多少筆資料進去
+
+Q6: 資料要不要隨機打散
+A6: 通常會自己做一遍，不過fit函數的shuffle=True可以把它打開。
+
+> 老師建議：就算原本就是打開的，那shuffle，
 
 
 

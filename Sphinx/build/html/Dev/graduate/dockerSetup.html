@@ -22,7 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜尋" href="../../search.html" />
-    <link rel="next" title="Linux Page" href="../../Linux/index.html" />
+    <link rel="next" title="handwrite.md" href="handwrite.html" />
     <link rel="prev" title="RabbitMQ 開發文件" href="RabbitMQ.html" /> 
 </head>
 
@@ -42,6 +42,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../writing%20list.html">Writing list</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Dev Page</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Graduate Page</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="RabbitMQ.html">RabbitMQ 開發文件</a></li>
@@ -50,6 +51,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#prometheus-node-exporter-grafana">建立Prometheus, Node exporter 以及 Grafana</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="handwrite.html">handwrite.md</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E5%88%86%E6%95%A3%E5%BC%8F.html">分散式學習.md</a></li>
 </ul>
 </li>
 </ul>
@@ -58,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">Docs Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Course/index.html">Course Page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Beauty/index.html">Tool Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Maker/index.html">Maker Page</a></li>
 </ul>
 
         </div>
@@ -173,7 +177,7 @@ services:
     - /proc:/host/proc:ro
     - /sys:/host/sys:ro
     - /:/rootfs:ro
-  command: 
+  command:
     - &#39;--path.procfs=/host/proc&#39;
     - &#39;--path.rootfs=/rootfs&#39;
     - &#39;--path.sysfs=/host/sys&#39;
@@ -187,7 +191,7 @@ services:
 <p>接著，我們要對prometheus裡面的prometheus.yml裡面加上node exporter這個target:</p>
 <div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>scrape_configs:
   - job_name: node
-    static_configs: 
+    static_configs:
       - targets: [&quot;node-exporter:9100&quot;]
 </pre></div>
 </div>
@@ -201,11 +205,11 @@ services:
 <p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10272141">建立Grafana教學</a></p>
 <p>同上，一開始先在docker-compose.yml裡面新增關於grafana:這個container的相關資訊：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grafana</span><span class="p">:</span>
-  <span class="n">image</span><span class="p">:</span> <span class="n">grafana</span><span class="o">/</span><span class="n">grafana</span><span class="p">:</span><span class="mf">8.1.5</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">grafana</span><span class="o">/</span><span class="n">grafana</span><span class="p">:</span><span class="mf">9.3.2</span>
   <span class="n">restart</span><span class="p">:</span> <span class="n">unless</span><span class="o">-</span><span class="n">stopped</span>
   <span class="n">volumes</span><span class="p">:</span>
     <span class="o">-</span> <span class="o">./</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span>
-  <span class="n">ports</span><span class="p">:</span> 
+  <span class="n">ports</span><span class="p">:</span>
     <span class="o">-</span> <span class="mi">3000</span><span class="p">:</span><span class="mi">3000</span>
 </pre></div>
 </div>
@@ -311,13 +315,44 @@ services:
 </pre></div>
 </div>
 <p>並且加上檔案rabbit_enabled_plugins</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">rabbitmq_prometheus</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">rabbitmq_prometheus</span><span class="p">]</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>接著跟node exporter一樣，把設定檔加在普羅米修斯的檔案裡面，接著再設定grafana</p>
 </section>
-<section id="python">
-<h3>Python<a class="headerlink" href="#python" title="本標頭的永久連結"></a></h3>
+<section id="python-pushgateway">
+<h3>Python (pushgateway)<a class="headerlink" href="#python-pushgateway" title="本標頭的永久連結"></a></h3>
+<p>最主要就是使用pushgateway這個東西。<a class="reference external" href="https://github.com/Prometheus/pushgateway">官網</a></p>
+<p>把相關設定加入docker-composer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pushgateway</span><span class="p">:</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">prom</span><span class="o">/</span><span class="n">pushgateway</span>
+    <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="mi">9091</span><span class="p">:</span><span class="mi">9091</span>
+</pre></div>
+</div>
+<p>在prometheus.yml裡面加入：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scrape_configs</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">job_name</span><span class="p">:</span> <span class="n">Pushgateway</span>
+    <span class="n">honor_labels</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">scrape_interval</span><span class="p">:</span> <span class="mi">5</span><span class="n">s</span>
+    <span class="n">static_configs</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pushgateway:9091&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>注意，那個scrape_interval: 5s代表每五秒去抓一次伺服器，詳細在<a class="reference external" href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/">普羅米修斯官方說明</a></p>
+</div></blockquote>
+<p>接著我們就可以在python裡面快樂的</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prometheus_client</span> <span class="kn">import</span> <span class="n">CollectorRegistry</span><span class="p">,</span> <span class="n">Gauge</span><span class="p">,</span> <span class="n">push_to_gateway</span>
+
+<span class="n">registry</span> <span class="o">=</span> <span class="n">CollectorRegistry</span><span class="p">()</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Gauge</span><span class="p">(</span><span class="s1">&#39;job_last_success_unixtime&#39;</span><span class="p">,</span> <span class="s1">&#39;Last time a batch job successfully finished&#39;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_to_current_time</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">push_to_gateway</span><span class="p">(</span><span class="s1">&#39;localhost:9091&#39;</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="s1">&#39;worker2&#39;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/prometheus/client_python">這裡</a>是prometheus, client_python 的範例，告訴你有幾種matrix可以用</p>
 </section>
 </section>
 </section>
@@ -327,7 +362,7 @@ services:
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="RabbitMQ.html" class="btn btn-neutral float-left" title="RabbitMQ 開發文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../../Linux/index.html" class="btn btn-neutral float-right" title="Linux Page" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="handwrite.html" class="btn btn-neutral float-right" title="handwrite.md" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

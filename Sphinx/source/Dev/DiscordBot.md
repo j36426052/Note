@@ -90,8 +90,11 @@ CMD： 在指行 docker run 的指令時會直接呼叫開啟 Tomcat Service
 discord
 ~~~
 
+### Build conatiner
 
-
+~~~
+docker run -p 3000:5000  <喜歡的image name>
+~~~
 
 ## 參考資料
 

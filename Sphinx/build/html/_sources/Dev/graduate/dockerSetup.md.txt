@@ -71,7 +71,7 @@ node-exporter:
     - /proc:/host/proc:ro
     - /sys:/host/sys:ro
     - /:/rootfs:ro
-  command: 
+  command:
     - '--path.procfs=/host/proc'
     - '--path.rootfs=/rootfs'
     - '--path.sysfs=/host/sys'
@@ -88,7 +88,7 @@ node-exporter:
 ~~~yml
 scrape_configs:
   - job_name: node
-    static_configs: 
+    static_configs:
       - targets: ["node-exporter:9100"]
 ~~~
 
@@ -107,11 +107,11 @@ scrape_configs:
 
 ~~~
 grafana:
-  image: grafana/grafana:8.1.5
+  image: grafana/grafana:9.3.2
   restart: unless-stopped
   volumes:
     - ./grafana/provisioning:/etc/grafana/provisioning
-  ports: 
+  ports:
     - 3000:3000
 ~~~
 
@@ -235,20 +235,51 @@ rabbitmq-plugins enable rabbitmq_prometheus
 ```
 volumes:
     - "./rabbit_enabled_plugins:/etc/rabbitmq/enabled_plugins"
-```   
+```
 並且加上檔案rabbit_enabled_plugins
 ```
-[rabbitmq_prometheus]
-```   
+[rabbitmq_prometheus].
+```
 
 接著跟node exporter一樣，把設定檔加在普羅米修斯的檔案裡面，接著再設定grafana
 
 
 
-### Python
+### Python (pushgateway)
 
+最主要就是使用pushgateway這個東西。[官網](https://github.com/Prometheus/pushgateway)
 
+把相關設定加入docker-composer
 
+~~~
+pushgateway:
+    image: prom/pushgateway
+    ports:
+      - 9091:9091
+~~~
 
+在prometheus.yml裡面加入：
+~~~
+scrape_configs:
+  - job_name: Pushgateway
+    honor_labels: true
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["pushgateway:9091"]
+~~~
 
+> 注意，那個scrape_interval: 5s代表每五秒去抓一次伺服器，詳細在[普羅米修斯官方說明](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
 
+接著我們就可以在python裡面快樂的
+
+~~~python
+from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
+
+registry = CollectorRegistry()
+g = Gauge('job_last_success_unixtime', 'Last time a batch job successfully finished', registry=registry)
+g.set_to_current_time()
+g.set(42)
+push_to_gateway('localhost:9091', job='worker2', registry=registry)
+~~~
+
+[這裡](https://github.com/prometheus/client_python)是prometheus, client_python 的範例，告訴你有幾種matrix可以用
