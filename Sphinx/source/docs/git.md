@@ -25,7 +25,7 @@ origin的意思是這個remote的name的感覺，而origin這個單字是約定�
 下一個指令是push
 
 ~~~git
-git push [origin] [branchLocal]:[branchRemote] 
+git push [origin] [branchLocal]:[branchRemote]
 ~~~
 
 就是把[branchLocal]推到[origin]這個節點上的[branchRemote]
@@ -35,7 +35,7 @@ git push [origin] [branchLocal]:[branchRemote]
 
 詳細可以參考:[合併發生衝突了，怎麼辦](https://gitbook.tw/chapters/branch/fix-conflict)
 
-**超級和平篇**  
+**超級和平篇**
 有master, cat兩個branch，如果想要把cat合併進去，先切換到master(checkout master)，接著打
 
 ~~~Git
@@ -43,7 +43,7 @@ git merge cat
 ~~~
 master就會把cat裡面的commit合併到自己裡面，然後cat還是擺在那裡。
 
-**一點點修改篇** 
+**一點點修改篇**
 假如有一個檔案 tem.txt, master和cat 兩個branch都修改了，執行完merge指令後會顯示合併失敗，並且在暫存區會多出衝突的檔案，檔案內會變成以下的樣子
 
 ~~~Git
@@ -53,7 +53,7 @@ other same code
   master side
 ===========
   cat side
-»>>>>>>>>>> cat  
+»>>>>>>>>>> cat
 
 other same code
 ~~~

@@ -1,4 +1,4 @@
-Tool Page
+Beauty Page
 ===================================
 
 .. toctree::
