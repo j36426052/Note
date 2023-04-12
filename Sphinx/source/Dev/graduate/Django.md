@@ -27,7 +27,7 @@ python manage.py startapp [app_name]
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
+ # Create your views here.
 def index(request):
     return HttpResponse('This is a test')
 ~~~
@@ -47,6 +47,8 @@ def index(request):
 為了在Django中使用Gradio，您需要在Django的views.py中導入gradio，並創建一個gr.Interface實例。然後，您需要在urls.py中添加一個路徑，將其連接到gr.Interface實例的get\_launch\_page方法。最後，您需要在settings.py中添加gradio到INSTALLED\_APPS列表[<sup>[2]</sup>](https://www.runoob.com/python3/python-ai-draw.html)。
 
 以下是一個簡單的例子，展示了如何在Django中使用Gradio來實現一個圖像分類模型：
+
+> 備註，記得安裝 pdm add setuptools
 
 views.py
 ~~~python
